@@ -39,6 +39,9 @@ export default class Home extends Component {
         })
     }
 
+    detailProduct = (value) => {
+        this.props.history.push("/detail/" + value.id);
+    }
 
     render() {
         return (
@@ -67,7 +70,7 @@ export default class Home extends Component {
                         {
                             this.state.arrProductSamples.map((item, index) =>
                                 <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
-                                    <div className="" style={{ width: "100%", cursor: "pointer" }}>
+                                    <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
                                         <img src={item.Image} alt="" className="image-pr-samples" />
                                         <div style={{ paddingTop: "10px" }}>
                                             <p className="name-pr-samples">{item.name}</p>

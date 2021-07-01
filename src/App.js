@@ -24,7 +24,7 @@ function App() {
           </div>
         </div>
         <Route exact path="/" render={(props) => <Home history={history} {...props} />} />
-        <Route exact path="/detail" render={(props) => <Detail history={history} {...props} />} />
+        <Route exact path="/detail/:idpro" render={(props) => <Detail history={history} {...props} />} />
       </Router>
       <div className="">
         <Footer />

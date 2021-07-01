@@ -6,9 +6,12 @@ export default class Footer extends Component {
             <div>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-3"><ul>
-
-                        </ul>
+                        <div className="col-3">
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
                         </div>
                         <div className="col-3"></div>
                         <div className="col-3"></div>
