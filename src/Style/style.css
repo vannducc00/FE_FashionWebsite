@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: white;
+}
+
+.Header ul {
+    margin: 0 !important;
+}
+
+.bar-left > ul > li {
+    margin-right: 34px;
+    cursor: pointer;
+}
+
+.bar-left > ul > li > span > i {
+    margin-right: 8px;
+}
+
+.bar-right ul {
+    float: right;
+}
+
+.bar-right > ul > li {
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.bar-left,
+.bar-right {
+    font-size: 14px;
+    color: black;
+}
+
+.contact-us ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigations {
+    display: flex;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+}
+
+.navigations ul {
+    padding: 5px 0 10px 0;
+    display: flex;
+    position: relative;
+}
+
+.items {
+    display: flex;
+    cursor: pointer;
+    padding: 0 24px;
+    align-items: center;
+    list-style-type: none;
+    justify-content: center;
+    font-weight: 400;
+}
+
+.items span {
+    margin: 0;
+    font-size: 13px;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: rgb(87, 84, 84);
+    border-bottom: 1.8px solid transparent;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+::placeholder {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgb(37, 37, 37);
+}
+
+.search-button {
+    position: absolute;
+    right: 65px;
+    top: 0px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.menu-bars--active {
+    font-weight: 500;
+    line-height: 40px;
+    color: black !important;
+    border-bottom: 1.8px solid black !important;
+}
+
+/* ------------------Swiper slide------------------ */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* -------------------------------------------- */
+
+.title-pro {
+    font-size: 2rem;
+    letter-spacing: 0.14em;
+    line-height: 36px;
+    max-width: none;
+    margin-bottom: 15px;
+    color: #252525;
+    text-transform: none;
+    margin-bottom: 15px;
+}
+
+.review {
+    letter-spacing: 0.15em;
+    font-size: 13px;
+    color: rgb(73, 71, 71);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-gender {
+    height: 42px;
+    width: 200px;
+    border: 1px solid black;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+.button-gender:hover {
+    background-color: black;
+    color: white;
+}
+
+.title-pro {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    font-size: 1.9rem;
+}
+
+.product-samples {
+    text-align: center;
+}
+
+.image-pr-samples {
+    width: 100%;
+}
+
+.name-pr-samples {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.text-content {
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.button-shop-now {
+    height: 42px;
+    width: 200px;
+    border: 1px solid black;
+    font-size: 12px;
+    margin-top: 25px;
+    text-transform: uppercase;
+}
+
+.button-shop-now:hover {
+    background-color: black;
+    color: white;
+}
+
+.heading {
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    line-height: 36px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 5px;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.pro-search {
+    height: 86vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #f5f5f5;
+}
+
+.pro-search i {
+    cursor: pointer;
+    padding: 30px 20px;
+    float: right;
+    font-size: 30px;
+    color: rgb(97, 96, 96);
+}
+
+.con-search {
+    top: 28%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-bottom: 0.2px solid black;
+}
+
+.con-search input {
+    width: 35em;
+    border: none;
+    outline: none;
+    margin: 5px;
+    background-color: transparent;
+}
+
+.con-search input::placeholder {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(88, 87, 87);
+    font-family: "Nunito" sans-serif;
+}
+
+.title-web {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.brand-name {
+    color: #000;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 50px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Marcellus", sans-serif;
+}
+
+.con-search i {
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 20px;
+}
+
+.con-search h3 {
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 20px 0;
+    color: rgb(77, 74, 74);
+    letter-spacing: 1.5px;
+}
