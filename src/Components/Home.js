@@ -18,7 +18,7 @@ export default class Home extends Component {
     componentDidMount() {
         axios({
             method: "GET",
-            url: "http://10.144.14.114:8080/handbag"
+            url: "http://10.144.14.125:8080/handbag"
         }).then((res) => {
             let arrProductSamples = []
             res.data.map(item => {
@@ -29,7 +29,7 @@ export default class Home extends Component {
 
         axios({
             method: "GET",
-            url: "http://10.144.14.114:8080/Mensellection"
+            url: "http://10.144.14.125:8080/Mensellection"
         }).then((res) => {
             let arrMensellection = []
             res.data.map(item => {
@@ -79,12 +79,12 @@ export default class Home extends Component {
                         }
                     </div>
                 </div>
-                <div className="container-fluid bag-moment" style={{ padding: "60px 175px" }}>
+                <div className="container-fluid bag-moment" style={{ padding: "60px 150px" }}>
                     <div className="row">
-                        <div className="col-md-7">
+                        <div className="col-md-5">
                             <img src="/Image/hp-pre-fall-2021-2-100621-desk.jpg" alt="" style={{ width: "100%" }} />
                         </div>
-                        <div className="col-md-5" style={{ position: "relative" }}>
+                        <div className="col-md-7" style={{ position: "relative" }}>
                             <div className="text-content">
                                 <h3 className="heading">the bag of the moment</h3>
                                 <p style={{ width: "90%" }}>Featuring a contemporary curved silhouette, the new hobo bag is crafted in Italy
@@ -117,7 +117,7 @@ export default class Home extends Component {
 
                 <div className="container-fluid bag-moment" style={{ padding: "60px 150px" }}>
                     <div className="row">
-                        <div className="col-md-3" style={{ position: "relative" }}>
+                        <div className="col-md-5" style={{ position: "relative" }}>
                             <div className="text-content">
                                 <h3 className="heading">A MODERN MAN'S UNIFORM</h3>
                                 <p style={{ width: "80%" }}>Menswear from the new collection presents the modern
@@ -126,7 +126,7 @@ export default class Home extends Component {
                                 <button className="button-shop-now">shop now</button>
                             </div>
                         </div>
-                        <div className="col-md-9">
+                        <div className="col-md-7">
                             <img src="/Image/hp-pre-fall-2021-3-100621-desk.jpg" alt="" style={{ width: "100%" }} />
                         </div>
                     </div>

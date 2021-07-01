@@ -22,8 +22,8 @@ export default class Navigation extends Component {
     render() {
         return (
             <>
-                <div className="Header container-fluid">
-                    <div className="contact-us" style={{ backgroundColor: "#f5f5f5", paddingTop: "5px" }}>
+                <div className="Header">
+                    <div className="contact-us" style={{ backgroundColor: "#f5f5f5" }}>
                         <div className="row" style={{}}>
                             <div className="col-4 bar-left">
                                 <ul>
