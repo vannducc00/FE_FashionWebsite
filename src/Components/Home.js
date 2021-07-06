@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
+import { Mensellection, productHandbag } from "../Service"
 
 import axios from "axios";
 
@@ -16,10 +17,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        axios({
-            method: "GET",
-            url: "http://10.144.14.125:8080/handbag"
-        }).then((res) => {
+        productHandbag().then((res) => {
             let arrProductSamples = []
             res.data.map(item => {
                 arrProductSamples.push(item)
@@ -27,10 +25,7 @@ export default class Home extends Component {
             this.setState({ arrProductSamples: arrProductSamples })
         })
 
-        axios({
-            method: "GET",
-            url: "http://10.144.14.125:8080/Mensellection"
-        }).then((res) => {
+        Mensellection().then((res) => {
             let arrMensellection = []
             res.data.map(item => {
                 arrMensellection.push(item)
@@ -68,16 +63,21 @@ export default class Home extends Component {
                 <div className="container-fluid" style={{ padding: "0px 4.5rem" }}>
                     <div className="row">
                         {
-                            this.state.arrProductSamples.map((item, index) =>
-                                <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
-                                    <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
-                                        <img src={item.Image} alt="" className="image-pr-samples" />
-                                        <div style={{ paddingTop: "10px" }}>
-                                            <p className="name-pr-samples">{item.name}</p>
-                                            <p className="price-pr-samples">{item.price} $</p>
+                            this.state.arrProductSamples.map((item, index) => {
+                                if (index < 4) {
+                                    return (
+                                        <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
+                                            <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
+                                                <img src={item.Image} alt="" className="image-pr-samples" />
+                                                <div style={{ paddingTop: "10px" }}>
+                                                    <p className="name-pr-samples">{item.name}</p>
+                                                    <p className="price-pr-samples">{item.price} $</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    )
+                                }
+                            }
                             )
                         }
                     </div>
@@ -105,7 +105,7 @@ export default class Home extends Component {
                         {
                             this.state.arrMensellection.map((item, index) =>
                                 <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
-                                    <div className="" style={{ width: "100%", cursor: "pointer" }}>
+                                    <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
                                         <img src={item.Image} alt="" className="image-pr-samples" />
                                         <div style={{ paddingTop: "10px" }}>
                                             <p className="name-pr-samples">{item.name}</p>

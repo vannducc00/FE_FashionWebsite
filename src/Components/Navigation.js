@@ -15,10 +15,6 @@ export default class Navigation extends Component {
         }
     }
 
-    searchProduct = () => {
-
-    }
-
     render() {
         return (
             <>
@@ -36,7 +32,7 @@ export default class Navigation extends Component {
                             </div>
                             <div className="col-4 bar-right">
                                 <ul>
-                                    <li>Sign in / Register</li>
+                                    <li><Link to="/Signin" className="btn-sign-in">Sign in / Register</Link></li>
                                     <li><i class="fal fa-heart" style={{ fontSize: "20px" }}></i></li>
                                     <li><i class="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></li>
                                 </ul>
@@ -50,9 +46,6 @@ export default class Navigation extends Component {
                         <ul>
                             {this.state.listMenu.map((item, index) => (
                                 <li className="items" key={index} onClick={() => this.setState({ currentMenu: item })}>
-                                    {/* {this.state.currentMenu == item ?
-                                            <i class="fas fa-circle" style={{ fontSize: "6px", padding: "0 5px" }}></i>
-                                            : null} */}
                                     <span className={this.state.currentMenu == item ? "menu-bars--active" : ""}>
                                         {item}
                                     </span>

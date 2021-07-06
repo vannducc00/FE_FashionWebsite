@@ -292,3 +292,226 @@
     color: rgb(77, 74, 74);
     letter-spacing: 1.5px;
 }
+
+.con-size,
+.con-color {
+    margin: 40px 0;
+}
+.con-color button {
+    margin: 10px 10px;
+}
+
+.select-size,
+.select-color {
+    border: 1px solid gray;
+    padding: 5px 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.con-buy {
+    text-align: center;
+}
+
+.buy {
+    height: 45px;
+    width: 100%;
+    border: none;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    text-transform: uppercase;
+}
+
+.buy:hover {
+    background-color: rgb(8, 8, 8);
+}
+
+.description {
+    margin: 30px 0;
+    letter-spacing: 1px;
+}
+
+.name-product {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 40px;
+}
+
+.price-relate {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.active-select {
+    background-color: black !important;
+    color: white !important;
+}
+
+.quantity-select {
+    margin: 30px 0;
+}
+
+.search-contact {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.search-contact > i {
+    cursor: pointer;
+    margin-top: 30px;
+    padding: 5px;
+    font-size: 25px;
+}
+
+.enter-email {
+    width: max-content;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.enter-email i {
+    cursor: pointer;
+}
+
+.enter-email input {
+    outline: none;
+    border: none;
+    background-color: white;
+    height: 2em;
+    width: 30em;
+    margin: 0 10px;
+}
+
+.enter-email input::placeholder {
+    color: gray;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.con-footer-1 {
+    position: relative;
+}
+
+.category-e ul {
+    list-style: none;
+    color: rgb(75, 74, 74);
+}
+
+.category-e li {
+    cursor: pointer;
+}
+
+.category-e ul .item:first-child {
+    color: black;
+}
+
+.name-relate {
+    margin-top: 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.btn-sign-in {
+    background-color: transparent;
+    text-decoration: none;
+    color: black;
+}
+
+.sign-in {
+    text-align: center;
+    text-transform: uppercase;
+    padding-bottom: 50px;
+}
+
+.sign-in h4 {
+    font-weight: 600;
+}
+
+.active {
+    padding: 10px 0;
+}
+
+.active p {
+}
+
+.active input {
+    border: none;
+    outline: none;
+    height: 2.5em;
+    width: 25em;
+    padding: 0 10px;
+}
+::placeholder {
+    font-size: 15px;
+    color: gray;
+    font-style: italic;
+}
+.form-sign-in,
+.form-sign-up {
+    padding: 0 110px;
+}
+
+.check {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.check span {
+    padding: 0 15px;
+}
+
+.con-button-sign .btn-sign-in {
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    color: white;
+    border: none;
+    height: 2.5em;
+    margin-bottom: 15px;
+}
+
+.con-button-sign {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.con-button-sign .btn-sign-in:hover {
+    background-color: black;
+}
+
+.con-button-sign .button-fogot {
+    color: rgb(48, 47, 47);
+    font-style: italic;
+    padding-top: 20px;
+}
+
+.sign-up {
+    border: 1px solid black;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 2.4em;
+}
+
+.sign-up:hover {
+    background-color: black;
+    color: white;
+}
+
+.hidden-form {
+    display: none;
+}
+.button-acc {
+    color: rgb(48, 47, 47);
+    font-style: italic;
+    padding: 0 10px;
+}

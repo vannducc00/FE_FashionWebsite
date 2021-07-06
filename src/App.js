@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Detail from './Components/Detail';
+import Signin from './Components/Signin';
 
 const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ function App() {
         </div>
         <Route exact path="/" render={(props) => <Home history={history} {...props} />} />
         <Route exact path="/detail/:idpro" render={(props) => <Detail history={history} {...props} />} />
+        <Route exact path="/signin" render={(props) => <Signin history={history} {...props} />} />
       </Router>
       <div className="">
         <Footer />
