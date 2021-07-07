@@ -2,11 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
 }
 .Header {
     position: fixed;
@@ -77,12 +79,11 @@
 
 .items span {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 40px;
     text-transform: uppercase;
-    color: rgb(87, 84, 84);
+    color: rgb(51, 51, 51);
     border-bottom: 1.8px solid transparent;
-    font-family: "Josefin Sans", sans-serif;
 }
 
 ::placeholder {
@@ -156,7 +157,6 @@
     letter-spacing: 0.15em;
     font-size: 13px;
     color: rgb(73, 71, 71);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .button-gender {
@@ -299,6 +299,7 @@
 }
 .con-color button {
     margin: 10px 10px;
+    font-size: 12px;
 }
 
 .select-size,
@@ -320,6 +321,7 @@
     background-color: rgb(46, 46, 46);
     color: white;
     text-transform: uppercase;
+    font-size: 12px;
 }
 
 .buy:hover {
@@ -329,16 +331,17 @@
 .description {
     margin: 30px 0;
     letter-spacing: 1px;
+    font-size: 14px;
 }
 
 .name-product {
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 600;
 }
 
 .price {
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 40px;
 }
 
@@ -514,4 +517,27 @@
     color: rgb(48, 47, 47);
     font-style: italic;
     padding: 0 10px;
+}
+
+.list-image {
+    width: 100%;
+}
+
+.list-name {
+    text-transform: uppercase;
+    padding-top: 15px;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.list-price {
+    font-weight: 600;
+    font-size: 15px;
+    font-family: "Quicksand", sans-serif;
+}
+
+.con-product-gender {
+    text-align: center;
+    padding-bottom: 40px;
 }
