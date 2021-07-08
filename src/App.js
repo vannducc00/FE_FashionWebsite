@@ -12,6 +12,7 @@ import { createBrowserHistory } from "history";
 import Detail from './Components/Detail';
 import Signin from './Components/Signin';
 import Handbag from './Components/Handbag';
+import Cart from './Components/Cart';
 
 const history = createBrowserHistory();
 
@@ -22,7 +23,7 @@ function App() {
       <Router>
         <div style={{ backgroundColor: "#ffff" }} className="container-fluid scrollbar" style={{ padding: "0 70px" }} id="style-1">
           <div className="row" style={{ marginTop: "10px" }}>
-            <Navigation />
+            <Navigation history={history} />
           </div>
         </div>
         <Route exact path="/" render={(props) => <Home history={history} {...props} />} />
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/productmen" render={(props) => <Men history={history} {...props} />} />
         <Route exact path="/productwomen" render={(props) => <Women history={history} {...props} />} />
         <Route exact path="/handbag" render={(props) => <Handbag history={history} {...props} />} />
+        <Route exact path="/cart" render={(props) => <Cart history={history} {...props} />} />
       </Router>
       <div className="">
         <Footer />

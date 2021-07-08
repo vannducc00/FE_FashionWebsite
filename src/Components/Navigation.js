@@ -11,8 +11,20 @@ export default class Navigation extends Component {
         this.state = {
             currentMenu: "",
             listMenu: ["Women", "Men", "Home Collection", "Jean couture", "atelier fashion", "Sale", "Designers", "la vacanza"],
-            isShowSearch: false
+            isShowSearch: false,
+            isLogin: false
         }
+    }
+
+    componentDidMount() {
+        if (localStorage.getItem("iduser") != null) {
+            this.setState({ isLogin: true })
+        }
+    }
+
+    signOut = () => {
+        localStorage.removeItem("iduser")
+        this.setState({ isLogin: false })
     }
 
     render() {
@@ -23,18 +35,29 @@ export default class Navigation extends Component {
                         <div className="row" style={{}}>
                             <div className="col-4 bar-left">
                                 <ul>
-                                    <li className=""><span><i class="far fa-phone-alt" style={{ fontSize: "20px" }}></i>Customer Service</span></li>
-                                    <li className=""><span><i class="fal fa-map-marker-alt" style={{ fontSize: "20px" }}></i>Boutiques</span></li>
+                                    <li className=""><span><i className="far fa-phone-alt" style={{ fontSize: "20px" }}></i>Customer Service</span></li>
+                                    <li className=""><span><i className="fal fa-map-marker-alt" style={{ fontSize: "20px" }}></i>Boutiques</span></li>
                                 </ul>
                             </div>
                             <div className="col-4" style={{ textAlign: "center", fontSize: "30px" }}>
-                                <i class="fal fa-crown"></i>
+                                <i className="fal fa-crown"></i>
                             </div>
                             <div className="col-4 bar-right">
                                 <ul>
-                                    <li><Link to="/Signin" className="btn-sign-in">Sign in / Register</Link></li>
-                                    <li><i class="fal fa-heart" style={{ fontSize: "20px" }}></i></li>
-                                    <li><i class="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></li>
+                                    <li>{!this.state.isLogin ?
+                                        <Link to="/Signin" className="btn-sign-in">Sign in / Register</Link> :
+                                        <div className="con-select">
+                                            <div>
+                                                <i className="far fa-user-circle"></i><span>{localStorage.getItem('username')}</span>
+                                            </div>
+                                            <div className="menu-select">
+                                                <p className="sign-out" onClick={this.signOut}>Sign out</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    </li>
+                                    <li><i className="fal fa-heart" style={{ fontSize: "20px" }}></i></li>
+                                    <li><Link to="/cart" className="btn-sign-in cart"><i className="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -52,18 +75,18 @@ export default class Navigation extends Component {
                                 </li>
                             ))}
                         </ul>
-                        <i class="fal fa-search search-button" onClick={() => this.setState({ isShowSearch: true })}></i>
+                        <i className="fal fa-search search-button" onClick={() => this.setState({ isShowSearch: true })}></i>
                     </div>
                 </div>
 
                 {this.state.isShowSearch ?
                     <div className="pro-search">
-                        <i class="fal fa-times" onClick={() => this.setState({ isShowSearch: false })}></i>
+                        <i className="fal fa-times" onClick={() => this.setState({ isShowSearch: false })}></i>
                         <div className="con-search" style={{ textAlign: "center" }}>
                             <h3>search</h3>
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                 <input type="text" placeholder="Search" />
-                                <i class="fal fa-search"></i>
+                                <i className="fal fa-search"></i>
                             </div>
                         </div>
                     </div>

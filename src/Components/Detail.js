@@ -6,7 +6,7 @@ export default class Detail extends Component {
     constructor() {
         super()
         this.state = {
-            quantity: 1,
+            // quantity: 1,
             arrDetail: [],
             selectSize: "",
             isShowImage: "",
@@ -50,21 +50,25 @@ export default class Detail extends Component {
         this.props.history.push('/detail/' + item.id)
     }
 
-    changeQuantity = (e) => {
-        this.setState({ quantity: e.target.value });
-    }
+    // changeQuantity = (e) => {
+    //     this.setState({ quantity: e.target.value });
+    // }
 
     changeImage = (e) => {
         this.setState({ isShowImage: e.target.src })
     }
 
+    handleAddToBag = (e) => {
+        console.log(e)
+    }
+
     render() {
-        let quantity;
-        if (this.state.quantity == "" || this.state.quantity < 1) {
-            quantity = 1;
-        } else {
-            quantity = this.state.quantity;
-        }
+        // let quantity;
+        // if (this.state.quantity == "" || this.state.quantity < 1) {
+        //     quantity = 1;
+        // } else {
+        //     quantity = this.state.quantity;
+        // }
         return (
             <div className="container-fluid">
                 <div className="container" style={{ paddingTop: "13.5em" }}>
@@ -91,23 +95,23 @@ export default class Detail extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-5">
+                        <div className="col-md-5" style={{ padding: "0 40px" }}>
                             {this.state.arrDetail.map((item, index) => (
                                 <div className="" key={index}>
                                     <h3 className="name-product">{item.name}</h3>
                                     <p className="price">$ {item.price}</p>
+                                    <p className="description">{item.description}</p>
                                     <div className="con-size">
                                         {item.size ? item.size.map((item, index) =>
                                             <button key={index} className={this.state.selectSize == item ? "select-size active-select" : "select-size"} onClick={() => this.setState({ selectSize: item })}>{item}</button>
                                         ) : null}
                                     </div>
-                                    <p className="description">{item.description}</p>
                                     <div className="con-color">
                                         {item.color ? item.color.map((item, index) =>
                                             <button key={index} className={this.state.currentClick == item ? "select-color active-select" : "select-color"} onClick={() => this.setState({ currentClick: item })} key={index}>{item}</button>
                                         ) : null}
                                     </div>
-                                    <div className="quantity-select">
+                                    {/* <div className="quantity-select">
                                         <TextField
                                             id="standard-basic"
                                             label="Quantity"
@@ -118,9 +122,9 @@ export default class Detail extends Component {
                                             value={this.state.quantity}
                                             onChange={this.changeQuantity}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="con-buy">
-                                        <button className="buy">add to bag</button>
+                                        <button className="buy" onClick={() => this.handleAddToBag(item)}>add to bag</button>
                                     </div>
                                 </div>
                             )

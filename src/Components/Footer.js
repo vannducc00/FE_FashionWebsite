@@ -12,12 +12,12 @@ export default class Footer extends Component {
                     <div className="search-contact">
                         <div className="enter-email">
                             <input type="text" placeholder="City, Post code, Contry" />
-                            <i class="fal fa-search" ></i>
+                            <i className="fal fa-search" ></i>
                         </div>
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-weixin"></i>
-                        <i class="fab fa-pinterest"></i>
+                        <i className="fab fa-facebook"></i>
+                        <i className="fab fa-instagram"></i>
+                        <i className="fab fa-weixin"></i>
+                        <i className="fab fa-pinterest"></i>
                     </div>
                 </div>
                 <div className="container" style={{ padding: "30px 0" }}>
