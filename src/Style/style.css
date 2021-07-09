@@ -313,6 +313,7 @@
 
 .con-buy {
     text-align: center;
+    padding-top: 3em;
 }
 
 .buy {
@@ -322,7 +323,6 @@
     background-color: rgb(46, 46, 46);
     color: white;
     text-transform: uppercase;
-    font-size: 12px;
 }
 
 .buy:hover {
@@ -356,11 +356,6 @@
     background-color: black !important;
     color: white !important;
 }
-
-.quantity-select {
-    margin: 30px 0;
-}
-
 .search-contact {
     position: absolute;
     top: 50%;
@@ -372,7 +367,7 @@
 .search-contact > i {
     cursor: pointer;
     margin-top: 30px;
-    padding: 5px;
+    padding: 5px 10px;
     font-size: 25px;
 }
 
@@ -447,9 +442,6 @@
 
 .active {
     padding: 10px 0;
-}
-
-.active p {
 }
 
 .active input {
@@ -582,4 +574,26 @@
 
 .con-select:hover .menu-select {
     display: block;
+}
+
+.quantity-select {
+    margin: 30px 10px;
+    border: 1px solid rgb(85, 85, 85);
+    width: max-content;
+}
+
+.quantity-select > input {
+    height: 2em;
+    width: 3em;
+    text-align: center;
+    outline: none;
+    border: none;
+    border-left: 1px solid rgb(85, 85, 85);
+    border-right: 1px solid rgb(85, 85, 85);
+}
+
+.quantity-select .change-number {
+    height: 2em;
+    width: 2em;
+    border: none;
 }

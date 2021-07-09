@@ -32,6 +32,10 @@ export default class Home extends Component {
         })
     }
 
+    modernuniform = () => {
+        this.props.history.push("/productmen")
+    }
+
     detailProduct = (value) => {
         this.props.history.push("/detail/" + value.id);
     }
@@ -136,7 +140,7 @@ export default class Home extends Component {
                                 <p style={{ width: "80%" }}>Menswear from the new collection presents the modern
                                     uniform for the guy of today. Fashion’s version of a camouflage
                                     print – Baroccoflage – pairs perfectly with staple denim and bold footwear.</p>
-                                <button className="button-shop-now">shop now</button>
+                                <button className="button-shop-now" onClick={this.modernuniform}>shop now</button>
                             </div>
                         </div>
                         <div className="col-md-7">

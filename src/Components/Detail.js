@@ -6,7 +6,7 @@ export default class Detail extends Component {
     constructor() {
         super()
         this.state = {
-            // quantity: 1,
+            quantity: 1,
             arrDetail: [],
             selectSize: "",
             isShowImage: "",
@@ -50,9 +50,9 @@ export default class Detail extends Component {
         this.props.history.push('/detail/' + item.id)
     }
 
-    // changeQuantity = (e) => {
-    //     this.setState({ quantity: e.target.value });
-    // }
+    changeQuantity = (e) => {
+        this.setState({ quantity: e.target.value });
+    }
 
     changeImage = (e) => {
         this.setState({ isShowImage: e.target.src })
@@ -62,13 +62,24 @@ export default class Detail extends Component {
         console.log(e)
     }
 
+    changeMinus = () => {
+        if (this.state.quantity > 1) {
+            this.setState({ quantity: this.state.quantity - 1 })
+        }
+    }
+
+    changePlus = () => {
+        this.setState({ quantity: this.state.quantity + 1 })
+    }
+
+    inputQuantity = (e) => {
+        let parseQuantity = parseInt(e.target.value)
+        if (!isNaN(parseQuantity)) {
+            this.setState({ quantity: parseQuantity })
+        }
+    }
+
     render() {
-        // let quantity;
-        // if (this.state.quantity == "" || this.state.quantity < 1) {
-        //     quantity = 1;
-        // } else {
-        //     quantity = this.state.quantity;
-        // }
         return (
             <div className="container-fluid">
                 <div className="container" style={{ paddingTop: "13.5em" }}>
@@ -111,18 +122,11 @@ export default class Detail extends Component {
                                             <button key={index} className={this.state.currentClick == item ? "select-color active-select" : "select-color"} onClick={() => this.setState({ currentClick: item })} key={index}>{item}</button>
                                         ) : null}
                                     </div>
-                                    {/* <div className="quantity-select">
-                                        <TextField
-                                            id="standard-basic"
-                                            label="Quantity"
-                                            type="number"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            value={this.state.quantity}
-                                            onChange={this.changeQuantity}
-                                        />
-                                    </div> */}
+                                    <div className="quantity-select">
+                                        <button className="change-number" onClick={this.changeMinus}><i className="fal fa-minus"></i></button>
+                                        <input type="text" value={this.state.quantity} onInput={(e) => this.inputQuantity(e)} />
+                                        <button className="change-number" onClick={this.changePlus}><i className="fal fa-plus"></i></button>
+                                    </div>
                                     <div className="con-buy">
                                         <button className="buy" onClick={() => this.handleAddToBag(item)}>add to bag</button>
                                     </div>
