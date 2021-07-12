@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/productmen" render={(props) => <Men history={history} {...props} />} />
         <Route exact path="/productwomen" render={(props) => <Women history={history} {...props} />} />
         <Route exact path="/handbag" render={(props) => <Handbag history={history} {...props} />} />
-        <Route exact path="/cart" render={(props) => <Cart history={history} {...props} />} />
+        <Route exact path="/cart/:customerid" render={(props) => <Cart history={history} {...props} />} />
         <Route exact path="/statistical" render={(props) => <Statistical history={history} {...props} />} />
       </Router>
       <div className="">

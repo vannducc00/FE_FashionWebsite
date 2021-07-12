@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 export default class Statistical extends Component {
     render() {
         return (
-            <div className="container">
+            <>
+                <div className="container-fluid">
 
-            </div>
+                </div>
+            </>
         )
     }
 }

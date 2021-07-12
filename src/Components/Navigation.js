@@ -4,6 +4,8 @@ import {
     Link,
 } from "react-router-dom";
 import "../Style/style.css"
+import { searchProducts } from "../Service"
+import { isExists } from 'date-fns';
 
 export default class Navigation extends Component {
     constructor() {
@@ -12,8 +14,10 @@ export default class Navigation extends Component {
             currentMenu: "",
             listMenu: ["Women", "Men", "Home Collection", "Jean couture", "atelier fashion", "Sale", "Designers", "la vacanza"],
             isShowSearch: false,
-            isLogin: false
+            isLogin: false,
+            arrProduct: []
         }
+        this.searchItem = React.createRef()
     }
 
     componentDidMount() {
@@ -25,6 +29,18 @@ export default class Navigation extends Component {
     signOut = () => {
         localStorage.removeItem("iduser")
         this.setState({ isLogin: false })
+    }
+
+    searchProducts = () => {
+        searchProducts().then(res => {
+            let arrProduct = []
+            res.data.map((item) => {
+                if (this.searchItem.current.value == item.name) {
+                    arrProduct.push(item)
+                }
+            })
+            this.setState({ arrProduct: arrProduct })
+        })
     }
 
     render() {
@@ -57,7 +73,7 @@ export default class Navigation extends Component {
                                     }
                                     </li>
                                     <li><i className="fal fa-heart" style={{ fontSize: "20px" }}></i></li>
-                                    <li><Link to="/cart" className="btn-sign-in cart"><i className="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></Link></li>
+                                    <li><Link to="/cart/:customerid" className="btn-sign-in cart"><i className="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -85,8 +101,8 @@ export default class Navigation extends Component {
                         <div className="con-search" style={{ textAlign: "center" }}>
                             <h3>search</h3>
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <input type="text" placeholder="Search" />
-                                <i className="fal fa-search"></i>
+                                <input ref={this.searchItem} type="text" placeholder="Search" />
+                                <i className="fal fa-search" onClick={this.searchProducts}></i>
                             </div>
                         </div>
                     </div>

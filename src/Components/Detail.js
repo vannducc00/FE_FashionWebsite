@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import TextField from "@material-ui/core/TextField";
-import { getDetailproduct, relatedProduct } from "../Service"
+import { addtocart, getDetailproduct, relatedProduct } from "../Service"
 
 export default class Detail extends Component {
     constructor() {
@@ -11,8 +10,9 @@ export default class Detail extends Component {
             selectSize: "",
             isShowImage: "",
             currentClick: "",
-            arrRelatedProduct: []
+            arrRelatedProduct: [],
         }
+        this.takeQuantity = React.createRef()
     }
 
 
@@ -59,7 +59,19 @@ export default class Detail extends Component {
     }
 
     handleAddToBag = (e) => {
-        console.log(e)
+        let data = {
+            product_id: e.id,
+            customer_id: localStorage.getItem("iduser"),
+            nameProduct: e.name,
+            imagePro: this.state.isShowImage,
+            quantity: this.takeQuantity.current.value,
+            color: this.state.currentClick,
+            size: this.state.selectSize,
+            amount: parseInt(e.price) * this.takeQuantity.current.value
+        }
+        addtocart(data).then(req => {
+            alert("Add to cart success !!!")
+        })
     }
 
     changeMinus = () => {
@@ -124,7 +136,7 @@ export default class Detail extends Component {
                                     </div>
                                     <div className="quantity-select">
                                         <button className="change-number" onClick={this.changeMinus}><i className="fal fa-minus"></i></button>
-                                        <input type="text" value={this.state.quantity} onInput={(e) => this.inputQuantity(e)} />
+                                        <input type="text" value={this.state.quantity} ref={this.takeQuantity} onInput={(e) => this.inputQuantity(e)} />
                                         <button className="change-number" onClick={this.changePlus}><i className="fal fa-plus"></i></button>
                                     </div>
                                     <div className="con-buy">
