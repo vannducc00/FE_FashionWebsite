@@ -26,16 +26,23 @@ export default class Detail extends Component {
             res.data.map(item => {
                 arrDetail.push(item)
             })
+            let imagePro
+            let colorPro
             let arrRelatedProduct = []
-            let a
             arrDetail.map(item => (
-                a = item.image_url[0]
+                colorPro = item.color[0],
+                imagePro = item.image_url[0]
             ))
             relatedProduct(res.data[0].type_pr_id).then(res => {
                 res.data.map(item => (
                     arrRelatedProduct.push(item)
                 ))
-                this.setState({ arrDetail: arrDetail, isShowImage: a, arrRelatedProduct: arrRelatedProduct })
+                this.setState({
+                    arrDetail: arrDetail,
+                    isShowImage: imagePro,
+                    currentClick: colorPro,
+                    arrRelatedProduct: arrRelatedProduct,
+                })
             })
         })
     }
@@ -69,9 +76,13 @@ export default class Detail extends Component {
             size: this.state.selectSize,
             amount: parseInt(e.price) * this.takeQuantity.current.value
         }
-        addtocart(data).then(req => {
-            alert("Add to cart success !!!")
-        })
+        if (e.size == null || this.state.selectSize != "") {
+            addtocart(data).then(req => {
+                alert("Add to cart success !!!")
+            })
+        } else {
+            alert("Please choose size !!!")
+        }
     }
 
     changeMinus = () => {

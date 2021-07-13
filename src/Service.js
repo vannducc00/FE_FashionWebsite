@@ -85,10 +85,10 @@ export const addtocart = (data) => {
     })
 }
 
-export const searchProducts = () => {
+export const searchProducts = (params) => {
     return axios({
         method: "GET",
-        url: url + '/searchproduct'
+        url: url + '/searchproduct?namePro=' + params
     })
 }
 
