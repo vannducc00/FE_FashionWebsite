@@ -1,17 +1,21 @@
-import axios from 'axios';
 import React, { Component } from 'react'
+import { createBrowserHistory } from "history";
 import {
     BrowserRouter as Router,
-    Link,
+    Link, Route
 } from "react-router-dom";
-import { Signup, checksignup, checksignin } from "../Service"
+import { Signup, checksignup, checksignin, checkpermissions } from "../Service"
+
+const history = createBrowserHistory();
+
 
 export default class Signin extends Component {
     constructor() {
         super()
         this.state = {
             isSignup: false,
-            arrCheckSignup: []
+            arrCheckSignup: [],
+            checkPhone: ""
         }
         this.userSignup = React.createRef()
         this.passwordSignup = React.createRef()
@@ -32,23 +36,22 @@ export default class Signin extends Component {
             username: this.userSignup.current.value
         }
         checksignup(dataCheck).then(res => {
-            console.log(res.data)
             if (
                 this.passwordSignup.current.value == this.retypePasswordSignup.current.value &&
-                this.phoneSignup.current.value.length == 10 &&
+                this.phoneSignup.current.value.length < 13 &&
                 res.data == true && this.passwordSignup.current.value.length >= 6
             ) {
                 let data = {
-                    phone: this.phoneSignup.current.value,
                     username: this.userSignup.current.value,
-                    password: this.passwordSignup.current.value
+                    password: this.passwordSignup.current.value,
+                    phone: this.phoneSignup.current.value
                 }
                 Signup(data).then(req => (
-                    console.log("Please check your login information !!!")
+                    alert("Please check your login information !!!")
                 ))
                 alert("Sign Up Success!")
             } else {
-                console.log("Please check your login information !!!")
+                alert("Please check your login information !!!")
             }
         })
     }
@@ -60,7 +63,16 @@ export default class Signin extends Component {
         }
         checksignin(dataCheck).then(res => {
             if (res.data == false) {
-                alert("Please check your login information !!!!")
+                checkpermissions(dataCheck).then(res => {
+                    if (res.data == false) {
+                        alert("Please check your login information !!!!")
+                    } else {
+                        localStorage.setItem("username", this.userSignup.current.value)
+                        localStorage.setItem("iduser", res.data.id)
+                        this.props.history.push("/statistical")
+                        window.location.reload(true)
+                    }
+                })
             } else {
                 localStorage.setItem("username", this.userSignup.current.value)
                 localStorage.setItem("iduser", res.data.id)
@@ -73,64 +85,77 @@ export default class Signin extends Component {
         if (localStorage.getItem("iduser") != null) {
             this.props.history.push("/")
         }
+
+    }
+
+    handleInputPhone = (e) => {
+        let currentValue = e.target.value
+        if (currentValue != null || currentValue != "") {
+            if (isNaN(currentValue)) {
+                currentValue = ""
+            }
+        }
+        this.setState({ checkPhone: currentValue })
     }
 
     render() {
         return (
-            <div style={{ backgroundColor: "#F9F9F9" }}>
-                <div className="container" style={{ paddingTop: "13em" }}>
-                    <div className="sign-in"><h4>Sign in</h4></div>
-                    <div className="row" style={{ paddingBottom: "50px" }}>
-                        <div className="col-md-6">
-                            <img src="/Image/undraw_Online_shopping.svg" alt="" style={{ width: "100%", padding: "50px" }} />
-                        </div>
-                        <div className="col-md-6" style={{ borderLeft: "1px solid #e2e2e2" }}>
-                            {!this.state.isSignup ? <div className="form-sign-in">
-                                <div className="con-username active">
-                                    <p>User name</p>
-                                    <input ref={this.userSignup} type="text" placeholder="user name" />
-                                </div>
-                                <div className="con-password active">
-                                    <p>Password</p>
-                                    <input ref={this.passwordSignup} type="password" placeholder="password" />
-                                </div>
-                                <div className="check">
-                                    <input type="checkbox" /><span>Remember me?</span>
-                                </div>
-                                <div className="con-button-sign">
-                                    <button className="btn-sign-in" onClick={this.handleSignin}>Sign in</button><br />
-                                    <Link to="" className="button-fogot">Forgot Password?</Link>
-                                </div>
-                                <button className="sign-up" onClick={this.handleChangeSignup}>Sign up</button>
-                            </div> : null}
+            <>
+                <div style={{ backgroundColor: "#F9F9F9" }}>
+                    <div className="container" style={{ paddingTop: "13em" }}>
+                        <div className="sign-in"><h4>Sign in</h4></div>
+                        <div className="row" style={{ paddingBottom: "50px" }}>
+                            <div className="col-md-6">
+                                <img src="/Image/undraw_Online_shopping.svg" alt="" style={{ width: "100%", padding: "50px" }} />
+                            </div>
+                            <div className="col-md-6" style={{ borderLeft: "1px solid #e2e2e2" }}>
+                                {!this.state.isSignup ? <div className="form-sign-in">
+                                    <div className="con-username active">
+                                        <p>User name</p>
+                                        <input ref={this.userSignup} type="text" placeholder="user name" />
+                                    </div>
+                                    <div className="con-password active">
+                                        <p>Password</p>
+                                        <input ref={this.passwordSignup} type="password" placeholder="password" />
+                                    </div>
+                                    <div className="check">
+                                        <input type="checkbox" /><span>Remember me?</span>
+                                    </div>
+                                    <div className="con-button-sign">
+                                        <button className="btn-sign-in" onClick={this.handleSignin}>Sign in</button><br />
+                                        <Link to="" className="button-fogot">Forgot Password?</Link>
+                                    </div>
+                                    <button className="sign-up" onClick={this.handleChangeSignup}>Sign up</button>
+                                </div> : null}
 
-                            {this.state.isSignup ? <div className="form-sign-up">
-                                <div className="con-username active">
-                                    <p>User name</p>
-                                    <input ref={this.userSignup} type="text" placeholder="user name" />
-                                </div>
-                                <div className="con-password active">
-                                    <p>Password</p>
-                                    <input ref={this.passwordSignup} type="password" placeholder="password" />
-                                </div>
-                                <div className="con-password active">
-                                    <p>Retype Password</p>
-                                    <input ref={this.retypePasswordSignup} type="password" placeholder="password" />
-                                </div>
-                                <div className="con-password active">
-                                    <p>Phone</p>
-                                    <input ref={this.phoneSignup} type="number" placeholder="phone" />
-                                </div>
-                                <div className="con-button-sign">
-                                    <button className="btn-sign-in" onClick={this.handleSignup}>Sign up</button><br />
-                                    <br />
-                                    <span className="button-acc">Already have an account?</span><Link to="/Signin" onClick={this.nextSignin}>Sign in</Link>
-                                </div>
-                            </div> : null}
+                                {this.state.isSignup ? <div className="form-sign-up">
+                                    <div className="con-username active">
+                                        <p>User name</p>
+                                        <input ref={this.userSignup} type="text" placeholder="user name" />
+                                    </div>
+                                    <div className="con-password active">
+                                        <p>Password</p>
+                                        <input ref={this.passwordSignup} type="password" placeholder="password" />
+                                    </div>
+                                    <div className="con-password active">
+                                        <p>Retype Password</p>
+                                        <input ref={this.retypePasswordSignup} type="password" placeholder="password" />
+                                    </div>
+                                    <div className="con-password active" >
+                                        <p >Phone</p>
+                                        <input ref={this.phoneSignup} value={this.state.checkPhone} style={this.state.checkPhone.length < 13 ? { border: "1px solid rgb(233, 233, 233) " } : { border: "1px solid red " }} type="text" placeholder="phone" onInput={(e) => this.handleInputPhone(e)} />
+                                    </div>
+                                    <div className="con-button-sign">
+                                        <button className="btn-sign-in" onClick={this.handleSignup}>Sign up</button><br />
+                                        <br />
+                                        <span className="button-acc">Already have an account?</span><Link to="/Signin" onClick={this.nextSignin}>Sign in</Link>
+                                    </div>
+                                </div> : null}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

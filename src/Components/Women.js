@@ -31,7 +31,9 @@ export default class Women extends Component {
                     {this.state.arrProductWomen.map((item, index) => (
                         <div div className="col-md-3" key={index}>
                             <div className="con-product-gender" onClick={() => this.proWomenDetail(item)}>
-                                <img src={item.Image} alt="" className="list-image" />
+                                <div className="" style={{ overflow: "hidden" }}>
+                                    <img src={item.Image} alt="" className="list-image image-pr-samples" />
+                                </div>
                                 <p className="list-name">{item.name}</p>
                                 <p className="list-price">$ {item.price}</p>
                             </div>

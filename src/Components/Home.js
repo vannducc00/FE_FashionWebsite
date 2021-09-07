@@ -82,7 +82,9 @@ export default class Home extends Component {
                                     return (
                                         <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
                                             <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
-                                                <img src={item.Image} alt="" className="image-pr-samples" />
+                                                <div className="" style={{ overflow: "hidden" }}>
+                                                    <img src={item.Image} alt="" className="image-pr-samples" />
+                                                </div>
                                                 <div style={{ paddingTop: "10px" }}>
                                                     <p className="name-pr-samples">{item.name}</p>
                                                     <p className="price-pr-samples">{item.price} $</p>
@@ -120,7 +122,9 @@ export default class Home extends Component {
                             this.state.arrMensellection.map((item, index) =>
                                 <div className="col-md-3 product-samples" key={index} style={{ padding: "0 8px" }}>
                                     <div className="" style={{ width: "100%", cursor: "pointer" }} onClick={() => this.detailProduct(item)}>
-                                        <img src={item.Image} alt="" className="image-pr-samples" />
+                                        <div className="" style={{ overflow: "hidden" }}>
+                                            <img src={item.Image} alt="" className="image-pr-samples" />
+                                        </div>
                                         <div style={{ paddingTop: "10px" }}>
                                             <p className="name-pr-samples">{item.name}</p>
                                             <p className="price-pr-samples">{item.price} $</p>

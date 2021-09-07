@@ -12,11 +12,10 @@ import { createBrowserHistory } from "history";
 import Detail from './Components/Detail';
 import Signin from './Components/Signin';
 import Handbag from './Components/Handbag';
-import Cart from './Components/Cart';
 import Statistical from './Components/Statistical';
+import Cart from './Components/Cart';
 
 const history = createBrowserHistory();
-
 
 function App() {
   return (
@@ -35,10 +34,10 @@ function App() {
         <Route exact path="/handbag" render={(props) => <Handbag history={history} {...props} />} />
         <Route exact path="/cart/:customerid" render={(props) => <Cart history={history} {...props} />} />
         <Route exact path="/statistical" render={(props) => <Statistical history={history} {...props} />} />
+        <div className="">
+          <Footer />
+        </div>
       </Router>
-      <div className="">
-        <Footer />
-      </div>
     </>
   );
 }

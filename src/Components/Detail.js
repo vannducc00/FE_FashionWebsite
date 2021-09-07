@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as dayjs from 'dayjs'
 import { addtocart, getDetailproduct, relatedProduct } from "../Service"
 
 export default class Detail extends Component {
@@ -71,14 +72,17 @@ export default class Detail extends Component {
             customer_id: localStorage.getItem("iduser"),
             nameProduct: e.name,
             imagePro: this.state.isShowImage,
+            type_pr_id: e.type_pr_id,
             quantity: this.takeQuantity.current.value,
             color: this.state.currentClick,
             size: this.state.selectSize,
-            amount: parseInt(e.price) * this.takeQuantity.current.value
+            amount: parseInt(e.price) * this.takeQuantity.current.value,
+            create_date: dayjs().format("YYYY-MM-DD")
         }
         if (e.size == null || this.state.selectSize != "") {
             addtocart(data).then(req => {
                 alert("Add to cart success !!!")
+                console.log(data.type_pr_id)
             })
         } else {
             alert("Please choose size !!!")
@@ -96,7 +100,7 @@ export default class Detail extends Component {
     }
 
     inputQuantity = (e) => {
-        let parseQuantity = parseInt(e.target.value)
+        let parseQuantity = e.target.value
         if (!isNaN(parseQuantity)) {
             this.setState({ quantity: parseQuantity })
         }

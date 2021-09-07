@@ -78,6 +78,17 @@
     font-weight: 400;
 }
 
+.current-menu {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    text-transform: uppercase;
+}
+
+.current-menu:hover {
+    color: #000;
+}
+
 .items span {
     margin: 0;
     font-size: 14px;
@@ -106,7 +117,9 @@
     font-weight: 500;
     line-height: 40px;
     color: black !important;
-    border-bottom: 1.8px solid black !important;
+    border-bottom: 1.8px solid rgb(136, 135, 135) !important;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 /* ------------------Swiper slide------------------ */
@@ -445,11 +458,12 @@
 }
 
 .active input {
-    border: none;
+    border: 1px solid rgb(233, 233, 233);
     outline: none;
     height: 2.5em;
     width: 25em;
     padding: 0 10px;
+    border-radius: 3px;
 }
 ::placeholder {
     font-size: 15px;
@@ -616,13 +630,14 @@
 }
 
 .name-cart {
-    font-size: 1.5em;
+    font-size: 1em;
+    /* font-weight: ; */
 }
 
 .quantity-cart {
-    color: rgb(77, 77, 77);
+    color: rgb(136, 133, 133);
     font-size: 14px;
-    padding-right: 5px;
+    padding: 0 8px;
 }
 
 .amount-cart {
@@ -637,9 +652,14 @@
     font-size: 20px;
 }
 
+.remote-pro-cart:hover {
+    cursor: pointer;
+}
+
 .total-money {
-    text-align: right;
-    padding-top: 8em;
+    padding-top: 3em;
+    /* text-align: left; */
+    float: left;
 }
 
 .total-amount {
@@ -649,7 +669,7 @@
 }
 
 .buy-cart {
-    text-transform: uppercase;
+    float: right;
     font-size: 1em;
     border: none;
     background-color: rgb(19, 19, 19);
@@ -685,4 +705,41 @@
     background-color: black;
     color: white;
     transition: 0.2s ease-in-out;
+}
+.contact {
+    padding-top: 3em;
+    padding-bottom: 2.5em;
+}
+
+.shipping-address {
+    text-transform: uppercase;
+    font-size: 1.1em;
+    border-bottom: 1px solid gray;
+    padding-bottom: 13px;
+    font-weight: 600;
+}
+
+.insert-text {
+    border: 1px solid rgb(177, 169, 169);
+    width: max-content;
+    width: 80%;
+    border-radius: 3px;
+}
+
+.insert-text > input {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.image-pr-samples:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
+.active-border-chart {
+    border: 1px solid rgb(173, 173, 173);
+    padding: 5px;
 }
