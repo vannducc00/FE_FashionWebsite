@@ -25,7 +25,7 @@ class Statistical extends Component {
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Monney ($)'
+                        text: 'Money ($)'
                     }
                 },
                 tooltip: {
@@ -56,7 +56,7 @@ class Statistical extends Component {
                     text: 'Revenue by type product'
                 },
                 subtitle: {
-                    text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+
                 },
                 credits: {
                     enabled: false,
@@ -71,7 +71,7 @@ class Statistical extends Component {
                 },
                 yAxis: {
                     title: {
-                        text: 'Total percent market share'
+                        text: 'Money ($)'
                     }
 
                 },
@@ -170,13 +170,13 @@ class Statistical extends Component {
                         name: 'Shoes',
                         y: 0
                     }, {
-                        name: 'Backpack',
+                        name: 'Handbag',
                         y: 0
                     }, {
                         name: 'Belt',
                         y: 0
                     }, {
-                        name: 'Clogs',
+                        name: 'Backpack',
                         y: 0
                     }]
                 }]
@@ -190,18 +190,32 @@ class Statistical extends Component {
         }
 
         revenuebymonth().then(res => {
-            let revenueByMonth = this.state.chartRevenueByMonth
+            let arrNewDate = []
             let arrDateTime = []
+            let arrRevenuePro = []
+            let revenueByMonth = this.state.chartRevenueByMonth
             for (let i = 1; i < 13; i++) {
-                let labelTime = i + "";
+                let labelTime = i + ""
                 if (i < 10) labelTime = 0 + labelTime;
                 arrDateTime.push(labelTime);
+                arrRevenuePro.push(0)
             }
+            // 
             res.data.map(item => {
-                revenueByMonth.series[0].data.push(item.revenue)
+                let index = parseInt(item.date_payment1)
+                arrRevenuePro[index - 1] = item.revenue
             })
-            revenueByMonth.xAxis.categories = arrDateTime
+            revenueByMonth.series[0].data = arrRevenuePro
+            // -------------------------------------
+
+            // 
+            arrRevenuePro.map((item, index) => {
+                arrNewDate.push(arrDateTime[index])
+            })
+            revenueByMonth.xAxis.categories = arrNewDate
+            // --------------------------------------
             this.setState({ chartRevenueByMonth: revenueByMonth })
+            console.log(this.state.chartRevenueByMonth)
         })
 
         revenuebyproduct().then(res => {

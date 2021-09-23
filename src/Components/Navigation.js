@@ -8,8 +8,8 @@ import { searchProducts } from "../Service"
 import { connect } from 'react-redux'
 
 class Navigation extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             currentMenu: "",
             listMenu: ["Women", "Men", "Home Collection", "Jean couture", "atelier fashion", "Sale", "Designers", "la vacanza"],
@@ -28,9 +28,9 @@ class Navigation extends Component {
 
     signOut = () => {
         localStorage.removeItem("iduser")
-        this.props.history.push('/signin')
-        localStorage.setItem("username", "")
+        localStorage.removeItem("username")
         this.setState({ isLogin: false })
+        this.props.history.push("/")
         window.location.reload(true)
     }
 
@@ -86,7 +86,7 @@ class Navigation extends Component {
                                         <Link to="/Signin" className="btn-sign-in">Sign in / Register</Link> :
                                         <div className="con-select">
                                             <div>
-                                                <i className="far fa-user-circle"></i><span>{localStorage.getItem('username')}</span>
+                                                <i className="far fa-user-circle"></i><span>{this.props.setUser}</span>
                                             </div>
                                             <div className="menu-select">
                                                 <p className="sign-out" onClick={this.signOut}>Sign out</p>
@@ -95,7 +95,13 @@ class Navigation extends Component {
                                     }
                                     </li>
                                     <li><i className="fal fa-heart" style={{ fontSize: "20px" }}></i></li>
-                                    <li><Link to="/cart/:customerid" className="btn-sign-in cart"><i className="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i><span style={{ paddingLeft: "5px" }}>Bag</span></Link></li>
+                                    <li>
+                                        <Link to="/cart/:customerid" className="btn-sign-in cart">
+                                            <i className="fal fa-shopping-bag" style={{ fontSize: "20px" }}></i>
+                                            <span style={{ padding: "0px 1px 0px 5px" }}>Bag</span>
+                                            {this.props.countBag != 0 ? ": " + this.props.countBag : null}
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -107,9 +113,7 @@ class Navigation extends Component {
                         <ul>
                             {this.state.listMenu.map((item, index) => (
                                 <li className="items" key={index} onClick={() => this.clickItem(item)}>
-                                    <Link to={'/product' + item} className={this.state.currentMenu == item ? " menu-bars--active" : "current-menu"}>
-                                        {item}
-                                    </Link>
+                                    <Link to={'/product' + item} className="current-menu">{item}</Link>
                                 </li>
                             ))}
                         </ul>

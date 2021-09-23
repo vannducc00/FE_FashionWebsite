@@ -34,7 +34,8 @@ export default class Cart extends Component {
         })
     }
 
-    remoteItem = (item) => {
+    remoteItem = (item, minus) => {
+        this.props.reduceCount(minus)
         let remoteData = {
             id_cart: item.id_cart
         }
@@ -227,7 +228,7 @@ export default class Cart extends Component {
                                     </div>
                                     <div className="col-md-7">
                                         <p className="name-cart">{item.name}</p>
-                                        <i className="fal fa-times remote-pro-cart" onClick={() => this.remoteItem(item)}></i>
+                                        <i className="fal fa-times remote-pro-cart" onClick={() => this.remoteItem(item, -1)}></i>
                                         <div>
                                             <span className="size-cart">Color: </span> <span>{item.color}</span>
                                             {item.size != "" ?

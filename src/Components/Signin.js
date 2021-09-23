@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createBrowserHistory } from "history";
 import {
     BrowserRouter as Router,
-    Link, Route
+    Link
 } from "react-router-dom";
 import { Signup, checksignup, checksignin, checkpermissions } from "../Service"
 
@@ -15,7 +15,8 @@ export default class Signin extends Component {
         this.state = {
             isSignup: false,
             arrCheckSignup: [],
-            checkPhone: ""
+            checkPhone: "",
+            checkInfo: true
         }
         this.userSignup = React.createRef()
         this.passwordSignup = React.createRef()
@@ -65,7 +66,7 @@ export default class Signin extends Component {
             if (res.data == false) {
                 checkpermissions(dataCheck).then(res => {
                     if (res.data == false) {
-                        alert("Please check your login information !!!!")
+                        this.setState({ checkInfo: false })
                     } else {
                         localStorage.setItem("username", this.userSignup.current.value)
                         localStorage.setItem("iduser", res.data.id)
@@ -76,6 +77,7 @@ export default class Signin extends Component {
             } else {
                 localStorage.setItem("username", this.userSignup.current.value)
                 localStorage.setItem("iduser", res.data.id)
+                this.props.history.push("/")
                 window.location.reload(true)
             }
         })
@@ -99,6 +101,7 @@ export default class Signin extends Component {
     }
 
     render() {
+        let a = localStorage.getItem("username")
         return (
             <>
                 <div style={{ backgroundColor: "#F9F9F9" }}>
@@ -112,15 +115,16 @@ export default class Signin extends Component {
                                 {!this.state.isSignup ? <div className="form-sign-in">
                                     <div className="con-username active">
                                         <p>User name</p>
-                                        <input ref={this.userSignup} type="text" placeholder="user name" />
+                                        <input style={this.state.checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} ref={this.userSignup} type="text" placeholder="user name" />
                                     </div>
                                     <div className="con-password active">
                                         <p>Password</p>
-                                        <input ref={this.passwordSignup} type="password" placeholder="password" />
+                                        <input style={this.state.checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} ref={this.passwordSignup} type="password" placeholder="password" />
                                     </div>
                                     <div className="check">
                                         <input type="checkbox" /><span>Remember me?</span>
                                     </div>
+                                    {this.state.checkInfo ? null : <p style={{ color: "red", fontSize: "12px", fontStyle: "italic" }}>please check information !!!</p>}
                                     <div className="con-button-sign">
                                         <button className="btn-sign-in" onClick={this.handleSignin}>Sign in</button><br />
                                         <Link to="" className="button-fogot">Forgot Password?</Link>

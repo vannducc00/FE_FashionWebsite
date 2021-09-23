@@ -66,7 +66,8 @@ export default class Detail extends Component {
         this.setState({ isShowImage: e.target.src })
     }
 
-    handleAddToBag = (e) => {
+    handleAddToBag = (e, plus) => {
+        this.props.augmentCount(plus)
         let data = {
             product_id: e.id,
             customer_id: localStorage.getItem("iduser"),
@@ -81,11 +82,7 @@ export default class Detail extends Component {
         }
         if (e.size == null || this.state.selectSize != "") {
             addtocart(data).then(req => {
-                alert("Add to cart success !!!")
-                console.log(data.type_pr_id)
             })
-        } else {
-            alert("Please choose size !!!")
         }
     }
 
@@ -155,7 +152,7 @@ export default class Detail extends Component {
                                         <button className="change-number" onClick={this.changePlus}><i className="fal fa-plus"></i></button>
                                     </div>
                                     <div className="con-buy">
-                                        <button className="buy" onClick={() => this.handleAddToBag(item)}>add to bag</button>
+                                        <button className="buy" onClick={() => this.handleAddToBag(item, 1)}>add to bag</button>
                                     </div>
                                 </div>
                             )

@@ -465,6 +465,7 @@
     padding: 0 10px;
     border-radius: 3px;
 }
+
 ::placeholder {
     font-size: 15px;
     color: gray;
