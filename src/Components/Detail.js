@@ -22,7 +22,8 @@ export default class Detail extends Component {
     }
 
     getProductDetail = (props) => {
-        getDetailproduct(props.match.params.idpro).then(res => {
+        let idProduct = props.match.params.idpro
+        getDetailproduct(idProduct).then(res => {
             let arrDetail = []
             res.data.map(item => {
                 arrDetail.push(item)
@@ -34,7 +35,9 @@ export default class Detail extends Component {
                 colorPro = item.color[0],
                 imagePro = item.image_url[0]
             ))
-            relatedProduct(res.data[0].type_pr_id).then(res => {
+
+            let typeProduct = res.data[0].type_pr_id
+            relatedProduct(typeProduct).then(res => {
                 res.data.map(item => (
                     arrRelatedProduct.push(item)
                 ))
@@ -49,7 +52,7 @@ export default class Detail extends Component {
     }
 
     componentWillReceiveProps = (nextprops) => {
-        if (nextprops.match.params.idpro != this.props.match.params.idpro) {
+        if (nextprops.match.params.idpro !== this.props.match.params.idpro) {
             this.getProductDetail(nextprops)
         }
     }
@@ -66,8 +69,7 @@ export default class Detail extends Component {
         this.setState({ isShowImage: e.target.src })
     }
 
-    handleAddToBag = (e, plus) => {
-        this.props.augmentCount(plus)
+    handleAddToBag = (e) => {
         let data = {
             product_id: e.id,
             customer_id: localStorage.getItem("iduser"),
@@ -80,8 +82,8 @@ export default class Detail extends Component {
             amount: parseInt(e.price) * this.takeQuantity.current.value,
             create_date: dayjs().format("YYYY-MM-DD")
         }
-        if (e.size == null || this.state.selectSize != "") {
-            addtocart(data).then(req => {
+        if (e.size == null || this.state.selectSize !== "") {
+            addtocart(data).then(res => {
             })
         }
     }
@@ -138,12 +140,12 @@ export default class Detail extends Component {
                                     <p className="description">{item.description}</p>
                                     <div className="con-size">
                                         {item.size ? item.size.map((item, index) =>
-                                            <button key={index} className={this.state.selectSize == item ? "select-size active-select" : "select-size"} onClick={() => this.setState({ selectSize: item })}>{item}</button>
+                                            <button key={index} className={this.state.selectSize === item ? "select-size active-select" : "select-size"} onClick={() => this.setState({ selectSize: item })}>{item}</button>
                                         ) : null}
                                     </div>
                                     <div className="con-color">
                                         {item.color ? item.color.map((item, index) =>
-                                            <button key={index} className={this.state.currentClick == item ? "select-color active-select" : "select-color"} onClick={() => this.setState({ currentClick: item })} key={index}>{item}</button>
+                                            <button key={index} className={this.state.currentClick === item ? "select-color active-select" : "select-color"} onClick={() => this.setState({ currentClick: item })} key={index}>{item}</button>
                                         ) : null}
                                     </div>
                                     <div className="quantity-select">
@@ -152,7 +154,7 @@ export default class Detail extends Component {
                                         <button className="change-number" onClick={this.changePlus}><i className="fal fa-plus"></i></button>
                                     </div>
                                     <div className="con-buy">
-                                        <button className="buy" onClick={() => this.handleAddToBag(item, 1)}>add to bag</button>
+                                        <button className="buy" onClick={() => this.handleAddToBag(item)}>add to bag</button>
                                     </div>
                                 </div>
                             )

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { showcart, remoteproductcart, payment } from '../Service'
 import * as dayjs from 'dayjs'
 
@@ -12,7 +11,8 @@ export default class Cart extends Component {
             currentMonth: "",
             currentYear: "",
             phone: "",
-            cardNumber: ""
+            cardNumber: "",
+            countCart: 0
         }
         this.takeLastName = React.createRef()
         this.takeFirstName = React.createRef()
@@ -34,15 +34,14 @@ export default class Cart extends Component {
         })
     }
 
-    remoteItem = (item, minus) => {
-        this.props.reduceCount(minus)
+    remoteItem = (item) => {
         let remoteData = {
             id_cart: item.id_cart
         }
         remoteproductcart(remoteData).then(res => {
-            if (res.data == true) {
+            if (res.data === true) {
                 let arrProCart = this.state.arrProCart
-                let indexDelete = arrProCart.findIndex(pro => pro.id_cart == item.id_cart)
+                let indexDelete = arrProCart.findIndex(pro => pro.id_cart === item.id_cart)
                 arrProCart.splice(indexDelete, 1)
                 this.updateTotal(arrProCart)
                 this.setState({ arrProCart: arrProCart })
@@ -52,10 +51,11 @@ export default class Cart extends Component {
 
     updateTotal = (arrayCart) => {
         let totalMoney = 0
-        arrayCart.map(item => {
+        arrayCart.forEach(item => {
             totalMoney += parseInt(item.amount)
         })
-        this.setState({ totalMoney })
+        this.setState({ totalMoney, countCart: arrayCart.length })
+        this.props.counCart(this.state.countCart)
     }
 
     IsComingHome = () => {
@@ -63,16 +63,16 @@ export default class Cart extends Component {
     }
 
     handlePay = () => {
-        if (this.takeLastName.current.value != "" &&
-            this.takeFirstName.current.value != "" &&
-            this.takeAddress.current.value != "" &&
-            this.takePhone.current.value != "" &&
-            this.takeMonth.current.value != "" &&
-            this.takeYear.current.value != "" &&
-            this.takeCardNumber.current.value != "" &&
+        if (this.takeLastName.current.value !== "" &&
+            this.takeFirstName.current.value !== "" &&
+            this.takeAddress.current.value !== "" &&
+            this.takePhone.current.value !== "" &&
+            this.takeMonth.current.value !== "" &&
+            this.takeYear.current.value !== "" &&
+            this.takeCardNumber.current.value !== "" &&
             this.takePhone.current.value.length < 13
         ) {
-            this.state.arrProCart.map((item) => {
+            this.state.arrProCart.forEach((item) => {
                 let data = {
                     cart_id: item.id_cart,
                     customer_id: localStorage.getItem("iduser"),
@@ -95,7 +95,7 @@ export default class Cart extends Component {
     checkYear = (e) => {
         let currentValue = e.target.value
         let year = new Date().getFullYear()
-        if (currentValue != null || currentValue != "") {
+        if (currentValue !== null || currentValue !== "") {
             currentValue = parseInt(currentValue)
             if (currentValue > year || currentValue < 0) {
                 currentValue = year
@@ -109,7 +109,7 @@ export default class Cart extends Component {
 
     checkMonth = (e) => {
         let currentValue = e.target.value
-        if (currentValue != null || currentValue != "") {
+        if (currentValue !== null || currentValue !== "") {
             currentValue = parseInt(currentValue)
             if (currentValue > 12 || currentValue < 0) {
                 currentValue = 12
@@ -123,7 +123,7 @@ export default class Cart extends Component {
 
     checkPhone = (e) => {
         let currentValue = e.target.value
-        if (currentValue != null || currentValue != "") {
+        if (currentValue !== null || currentValue !== "") {
             if (isNaN(currentValue)) {
                 currentValue = ""
             }
@@ -133,7 +133,7 @@ export default class Cart extends Component {
 
     checkCardNumber = (e) => {
         let currentValue = e.target.value
-        if (currentValue != null || currentValue != "") {
+        if (currentValue !== null || currentValue !== "") {
             currentValue = parseInt(currentValue)
             if (isNaN(currentValue)) {
                 currentValue = ""
@@ -148,7 +148,7 @@ export default class Cart extends Component {
                 <div className="container" style={{ marginTop: "12em", padding: "20px 0" }}>
                     <h1 className="heading-cart">Shopping Bag</h1>
 
-                    {this.state.totalMoney == 0 ? <div className="no-product">
+                    {this.state.totalMoney === 0 ? <div className="no-product">
                         <h3>You don't have any products yet</h3>
                         <button className="continue-shopping" onClick={this.IsComingHome}>continue shopping</button>
                     </div> : null}
@@ -219,7 +219,7 @@ export default class Cart extends Component {
                                     </div>
                                 </div> : null}
                         </div>
-                        <div className="col-4">
+                        <div className="col-4" >
                             {this.state.totalMoney > 0 ? <h5 style={{ fontWeight: "bold", borderBottom: "1px solid gray", paddingBottom: "10px" }}>Your Order</h5> : null}
                             {this.state.arrProCart.map((item, index) => (
                                 <div className="row" key={index} style={{ marginTop: "3em", position: "relative", backgroundColor: "#ecf0f1", padding: "5px" }}>
@@ -228,10 +228,10 @@ export default class Cart extends Component {
                                     </div>
                                     <div className="col-md-7">
                                         <p className="name-cart">{item.name}</p>
-                                        <i className="fal fa-times remote-pro-cart" onClick={() => this.remoteItem(item, -1)}></i>
+                                        <i className="fal fa-times remote-pro-cart" onClick={() => this.remoteItem(item)}></i>
                                         <div>
                                             <span className="size-cart">Color: </span> <span>{item.color}</span>
-                                            {item.size != "" ?
+                                            {item.size !== "" ?
                                                 <>
                                                     <span className="color-cart active-space">Size: </span>
                                                     <span>{item.size}</span>

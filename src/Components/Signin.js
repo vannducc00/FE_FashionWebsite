@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import { createBrowserHistory } from "history";
-import {
-    BrowserRouter as Router,
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Signup, checksignup, checksignin, checkpermissions } from "../Service"
-
-const history = createBrowserHistory();
 
 
 export default class Signin extends Component {
@@ -38,9 +32,9 @@ export default class Signin extends Component {
         }
         checksignup(dataCheck).then(res => {
             if (
-                this.passwordSignup.current.value == this.retypePasswordSignup.current.value &&
+                this.passwordSignup.current.value === this.retypePasswordSignup.current.value &&
                 this.phoneSignup.current.value.length < 13 &&
-                res.data == true && this.passwordSignup.current.value.length >= 6
+                res.data === true && this.passwordSignup.current.value.length >= 6
             ) {
                 let data = {
                     username: this.userSignup.current.value,
@@ -63,9 +57,9 @@ export default class Signin extends Component {
             password: this.passwordSignup.current.value
         }
         checksignin(dataCheck).then(res => {
-            if (res.data == false) {
+            if (res.data === false) {
                 checkpermissions(dataCheck).then(res => {
-                    if (res.data == false) {
+                    if (res.data === false) {
                         this.setState({ checkInfo: false })
                     } else {
                         localStorage.setItem("username", this.userSignup.current.value)
@@ -84,7 +78,7 @@ export default class Signin extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem("iduser") != null) {
+        if (localStorage.getItem("iduser") !== null) {
             this.props.history.push("/")
         }
 
@@ -92,7 +86,7 @@ export default class Signin extends Component {
 
     handleInputPhone = (e) => {
         let currentValue = e.target.value
-        if (currentValue != null || currentValue != "") {
+        if (currentValue !== null || currentValue !== "") {
             if (isNaN(currentValue)) {
                 currentValue = ""
             }
@@ -101,7 +95,6 @@ export default class Signin extends Component {
     }
 
     render() {
-        let a = localStorage.getItem("username")
         return (
             <>
                 <div style={{ backgroundColor: "#F9F9F9" }}>

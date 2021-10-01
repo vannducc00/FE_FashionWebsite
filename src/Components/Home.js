@@ -17,7 +17,7 @@ export default class Home extends Component {
     componentDidMount() {
         productHandbag().then((res) => {
             let arrProductSamples = []
-            res.data.map(item => {
+            res.data.forEach(item => {
                 arrProductSamples.push(item)
             })
             this.setState({ arrProductSamples: arrProductSamples })
@@ -25,7 +25,7 @@ export default class Home extends Component {
 
         Mensellection().then((res) => {
             let arrMensellection = []
-            res.data.map(item => {
+            res.data.forEach(item => {
                 arrMensellection.push(item)
             })
             this.setState({ arrMensellection: arrMensellection })

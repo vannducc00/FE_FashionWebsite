@@ -11,6 +11,7 @@ export default class Men extends Component {
 
     componentDidMount() {
         productmen().then(res => {
+            console.log(res.data);
             let arrProductMen = []
             res.data.map(item => {
                 arrProductMen.push(item)

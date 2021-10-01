@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { revenuebymonth, revenuebyproduct } from '../Service'
-import Highcharts, { color } from "highcharts";
+import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as dayjs from 'dayjs'
 
 class Statistical extends Component {
     constructor() {
@@ -185,7 +184,7 @@ class Statistical extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('username') != 'admin_duc' && localStorage.getItem('iduser') != 1) {
+        if (localStorage.getItem('username') !== 'admin_duc' && localStorage.getItem('iduser') !== 1) {
             this.props.history.push('/')
         }
 
@@ -193,58 +192,59 @@ class Statistical extends Component {
             let arrNewDate = []
             let arrDateTime = []
             let arrRevenuePro = []
-            let revenueByMonth = this.state.chartRevenueByMonth
+            let chartRevenueByMonth = this.state.chartRevenueByMonth
             for (let i = 1; i < 13; i++) {
                 let labelTime = i + ""
-                if (i < 10) labelTime = 0 + labelTime;
+                if (i < 10) labelTime = 0 + labelTime
                 arrDateTime.push(labelTime);
                 arrRevenuePro.push(0)
             }
             // 
-            res.data.map(item => {
+            res.data.forEach(item => {
                 let index = parseInt(item.date_payment1)
                 arrRevenuePro[index - 1] = item.revenue
             })
-            revenueByMonth.series[0].data = arrRevenuePro
+            chartRevenueByMonth.series[0].data = arrRevenuePro
             // -------------------------------------
 
             // 
-            arrRevenuePro.map((item, index) => {
+            arrRevenuePro.forEach((item, index) => {
                 arrNewDate.push(arrDateTime[index])
             })
-            revenueByMonth.xAxis.categories = arrNewDate
+            chartRevenueByMonth.xAxis.categories = arrNewDate
             // --------------------------------------
-            this.setState({ chartRevenueByMonth: revenueByMonth })
-            console.log(this.state.chartRevenueByMonth)
+            this.setState({ chartRevenueByMonth })
         })
 
         revenuebyproduct().then(res => {
             let chartProduct = this.state.chartProduct
             let chartRate = this.state.chartRate
-            res.data.map(item => {
-                if (item.type_pr_id == "1") {
-                    chartProduct.series[0].data[0].y = (item.revenue)
-                    chartRate.series[0].data[0].y = (item.revenue);
+            let seriesPro = chartProduct.series[0]
+            let seriesRate = chartRate.series[0]
+            res.data.forEach(item => {
+                if (item.type_pr_id === 1) {
+                    seriesPro.data[0].y = (item.revenue)
+                    seriesRate.data[0].y = (item.revenue);
                 }
-                if (item.type_pr_id == "2") {
-                    chartProduct.series[0].data[1].y = (item.revenue)
-                    chartRate.series[0].data[1].y = (item.revenue);
+                if (item.type_pr_id === 2) {
+                    seriesPro.data[1].y = (item.revenue)
+                    seriesRate.data[1].y = (item.revenue);
                 }
-                if (item.type_pr_id == "3") {
-                    chartProduct.series[0].data[2].y = (item.revenue)
-                    chartRate.series[0].data[2].y = (item.revenue);
+                if (item.type_pr_id === 3) {
+                    seriesPro.data[2].y = (item.revenue)
+                    seriesRate.data[2].y = (item.revenue);
                 }
-                if (item.type_pr_id == "4") {
-                    chartProduct.series[0].data[3].y = (item.revenue)
-                    chartRate.series[0].data[3].y = (item.revenue);
+                if (item.type_pr_id === 4) {
+                    seriesPro.data[3].y = (item.revenue)
+                    seriesRate.data[3].y = (item.revenue);
                 }
-                if (item.type_pr_id == "5") {
-                    chartProduct.series[0].data[4].y = (item.revenue)
-                    chartRate.series[0].data[4].y = (item.revenue);
+                if (item.type_pr_id === 5) {
+                    seriesPro.data[4].y = (item.revenue)
+                    seriesRate.data[4].y = (item.revenue);
                 }
-                if (item.type_pr_id == "6") {
-                    chartProduct.series[0].data[5].y = (item.revenue)
-                    chartRate.series[0].data[5].y = (item.revenue);
+                if (item.type_pr_id === 6) {
+                    seriesPro.data[5].y = (item.revenue)
+                    seriesRate.data[5].y = (item.revenue);
                 }
             })
             this.setState({ chartProduct, chartRate })

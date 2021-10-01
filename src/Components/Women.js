@@ -12,7 +12,7 @@ export default class Women extends Component {
     componentDidMount() {
         productwomen().then(res => {
             let arrProductWomen = []
-            res.data.map(item => {
+            res.data.forEach(item => {
                 arrProductWomen.push(item)
             }
             )
