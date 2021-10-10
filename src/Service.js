@@ -1,5 +1,5 @@
 import axios from "axios"
-const ip = "10.144.14.125"
+const ip = "192.168.2.105"
 const port = "8080"
 const url = "http://" + ip + ":" + port
 
@@ -123,6 +123,13 @@ export const payment = (data) => {
     })
 }
 
+export const allproduct = () => {
+    return axios({
+        method: "POST",
+        url: url + '/allproduct'
+    })
+}
+
 export const checkpermissions = (data) => {
     return axios({
         method: "POST",
@@ -165,3 +172,4 @@ export const jeancouture = () => {
         url: url + '/jeancouture'
     })
 }
+
