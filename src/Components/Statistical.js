@@ -15,6 +15,7 @@ export default function Statistical(props) {
         }
 
         revenuebymonth().then(res => {
+            let dataRevenueByMonth = res.data
             let arrNewDate = []
             let arrDateTime = []
             let arrRevenuePro = []
@@ -26,7 +27,7 @@ export default function Statistical(props) {
                 arrRevenuePro.push(0)
             }
             // 
-            res.data.forEach(item => {
+            dataRevenueByMonth.map(item => {
                 let index = parseInt(item.date_payment1)
                 arrRevenuePro[index - 1] = item.revenue
             })
@@ -47,7 +48,7 @@ export default function Statistical(props) {
             let isChartRate = chartRate
             let seriesPro = isChartProduct.series[0]
             let seriesRate = isChartRate.series[0]
-            res.data.forEach(item => {
+            res.data.map(item => {
                 if (item.type_pr_id === 1) {
                     seriesPro.data[0].y = (item.revenue)
                     seriesRate.data[0].y = (item.revenue);
