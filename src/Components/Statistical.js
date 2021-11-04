@@ -32,13 +32,15 @@ export default function Statistical(props) {
                 arrRevenuePro[index - 1] = item.revenue
             })
             chartRevenueByMonth.series[0].data = arrRevenuePro
+            console.log(chartRevenueByMonth.series[0].data)
             // -------------------------------------
 
             // 
-            arrRevenuePro.forEach((item, index) => {
+            arrRevenuePro.map((item, index) => {
                 arrNewDate.push(arrDateTime[index])
             })
             chartRevenueByMonth.xAxis.categories = arrNewDate
+            console.log(chartRevenueByMonth.xAxis.categories = arrNewDate)
             // --------------------------------------
             setChartRevenueByMonth(isChartRevenueByMonth)
         })

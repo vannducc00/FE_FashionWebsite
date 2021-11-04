@@ -104,22 +104,28 @@ export default function Signin(props) {
                         </div>
                         <div className="col-md-6" style={{ borderLeft: "1px solid #e2e2e2" }}>
                             {!isSignup ? <div className="form-sign-in">
-                                <div className="con-username active">
-                                    <p>User name</p>
-                                    <input ref={userSignin} style={checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} type="text" placeholder="user name" />
-                                </div>
-                                <div className="con-password active">
-                                    <p>Password</p>
-                                    <input style={checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} ref={passwordSignup} type="password" placeholder="password" />
-                                </div>
-                                <div className="check">
-                                    <input type="checkbox" /><span>Remember me?</span>
-                                </div>
-                                {checkInfo ? null : <p style={{ color: "red", fontSize: "12px", fontStyle: "italic" }}>please check information !!!</p>}
-                                <div className="con-button-sign">
-                                    <button className="btn-sign-in" onClick={handleSignin}>Sign in</button><br />
-                                    <Link to="" className="button-fogot">Forgot Password?</Link>
-                                </div>
+                                <form type="submit" onSubmit={(e) => {
+                                    e.preventDefault()
+                                    handleSignin()
+                                }}>
+                                    <div className="con-username active">
+                                        <p>User name</p>
+                                        <input ref={userSignin} style={checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} type="text" placeholder="user name" />
+                                    </div>
+                                    <div className="con-password active">
+                                        <p>Password</p>
+                                        <input style={checkInfo ? {} : { border: "1px solid rgb(221, 48, 48)" }} ref={passwordSignup} type="password" placeholder="password" />
+                                    </div>
+                                    <div className="check">
+                                        <input type="checkbox" /><span>Remember me?</span>
+                                    </div>
+                                    <input type="submit" style={{ display: 'none' }} />
+                                    {checkInfo ? null : <p style={{ color: "red", fontSize: "12px", fontStyle: "italic" }}>please check information !!!</p>}
+                                    <div className="con-button-sign">
+                                        <button className="btn-sign-in" onClick={handleSignin}>Sign in</button><br />
+                                        <Link to="" className="button-fogot">Forgot Password?</Link>
+                                    </div>
+                                </form>
                                 <button className="sign-up" onClick={handleChangeSignup}>Sign up</button>
                             </div> : null}
 
