@@ -1,5 +1,5 @@
 import axios from "axios"
-const ip = "192.168.2.100"
+const ip = "10.144.14.126"
 const port = "8080"
 const url = "http://" + ip + ":" + port
 

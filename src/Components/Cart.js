@@ -22,9 +22,9 @@ export default function Cart(props) {
     useEffect(() => {
         showcart(isUser).then(res => {
             let arrProCart = []
-            res.data.map((item) => (
+            res.data.map((item, key) => {
                 arrProCart.push(item)
-            ))
+            })
             updateTotal(arrProCart)
             setArrProCart(arrProCart)
         })
@@ -36,7 +36,6 @@ export default function Cart(props) {
         }
         remoteproductcart(remoteData).then(res => {
             if (res.data === true) {
-                let arrProCart = arrProCart
                 let indexDelete = arrProCart.findIndex(pro => pro.id_cart === item.id_cart)
                 arrProCart.splice(indexDelete, 1)
                 updateTotal(arrProCart)
@@ -48,7 +47,7 @@ export default function Cart(props) {
 
     const updateTotal = (arrayCart) => {
         let totalMoney = 0
-        arrayCart.forEach(item => {
+        arrayCart.map(item => {
             totalMoney += parseInt(item.amount)
         })
         setTotalMoney(totalMoney)
@@ -217,34 +216,36 @@ export default function Cart(props) {
                     </div>
                     <div className="col-4" >
                         {totalMoney > 0 ? <h5 style={{ fontWeight: "bold", borderBottom: "1px solid gray", paddingBottom: "10px" }}>Your Order</h5> : null}
-                        {arrProCart.map((item, index) => (
-                            <div className="row" key={index} style={{ marginTop: "3em", position: "relative", backgroundColor: "#ecf0f1", padding: "5px" }}>
-                                <div className="col-md-4" >
-                                    <img className="image-cart" src={item.Image} alt="" />
-                                </div>
-                                <div className="col-md-7">
-                                    <p className="name-cart">{item.name}</p>
-                                    <i className="fal fa-times remote-pro-cart" onClick={() => remoteItem(item, -1)}></i>
-                                    <div>
-                                        <span className="size-cart">Color: </span> <span>{item.color}</span>
-                                        {item.size !== "" ?
-                                            <>
-                                                <span className="color-cart active-space">Size: </span>
-                                                <span>{item.size}</span>
-                                            </>
-                                            : null}
+                        <div className="" style={{ overflow: 'auto', height: '34em' }}>
+                            {arrProCart.map((item, index) => (
+                                <div className="row" key={index} style={{ marginTop: "3em", position: "relative", backgroundColor: "#ecf0f1", padding: "5px", width: '100%' }}>
+                                    <div className="col-md-4" >
+                                        <img className="image-cart" src={item.Image} alt="" />
                                     </div>
-                                    <div >
-                                        <div style={{ paddingTop: "1.5em" }}>
-                                            $ <span>{item.amount}</span>
-                                            <span className="quantity-cart">x</span> <span>{item.quantity}</span>
+                                    <div className="col-md-7">
+                                        <p className="name-cart">{item.name}</p>
+                                        <i className="fal fa-times remote-pro-cart" onClick={() => remoteItem(item, -1)}></i>
+                                        <div>
+                                            <span className="size-cart">Color: </span> <span>{item.color}</span>
+                                            {item.size !== "" ?
+                                                <>
+                                                    <span className="color-cart active-space">Size: </span>
+                                                    <span>{item.size}</span>
+                                                </>
+                                                : null}
+                                        </div>
+                                        <div >
+                                            <div style={{ paddingTop: "1.5em" }}>
+                                                $ <span>{item.amount}</span>
+                                                <span className="quantity-cart">x</span> <span>{item.quantity}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                         {totalMoney > 0 ? <p style={{ float: "right", marginTop: "20px" }}>
-                            <span>Total money:</span> <span className="total-amount">${totalMoney}</span>
+                            <span>Total money:</span> <span className="total-amount">$ {totalMoney}</span>
                         </p> : null}
                     </div>
                 </div>

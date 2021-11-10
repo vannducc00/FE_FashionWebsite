@@ -1,89 +1,72 @@
+import { set } from 'date-fns/esm';
 import React, { Component, useState, useEffect, useRef } from 'react'
 import { Link } from "react-router-dom";
 import { Signup, checksignup, checksignin, checkpermissions, countcart } from "../Service"
 
 export default function Signin(props) {
-    const [isSignup, setIsSignup] = useState(false)
+    const [isSignup, setIsSignup] = useState('')
     const [checkInfo, setCheckInfo] = useState(true)
     const [checkInfoSignup, setCheckInfoSignup] = useState(true)
-    const [arrCheckSignup, setArrCheckSignup] = useState([])
-    const [userNameVal, setUserNameVal] = useState('')
-    const [passwordVal, setPasswordVal] = useState('')
-    const [confirmPasswordVal, setConfirmPasswordVal] = useState('')
-    const [phoneVal, setPhoneVal] = useState('')
+    const usernameRef = useRef(null)
+    const passwordRef = useRef(null)
+    const confirmPasswordRef = useRef(null)
+    const phoneNumRef = useRef(null)
 
     useEffect(() => {
         let getIdCustomer = localStorage.getItem("iduser")
         if (getIdCustomer !== null) {
             props.history.push("/")
         }
-
     }, [])
 
     const handleSignin = () => {
-        let userName = userNameVal
-        let password = passwordVal
         let dataCheck = {
-            username: userName,
-            password: password
+            username: usernameRef.current.value,
+            password: passwordRef.current.value
         }
         checksignin(dataCheck).then(res => {
-            if (res.data === false) {
+            if (res.data == false) {
                 checkpermissions(dataCheck).then(res => {
-                    if (res.data === false && userNameVal == '' || passwordVal == '') {
-                        setCheckInfo(false)
+                    if (res.data == false || dataCheck.username == '' || dataCheck.password == '') {
+                        setCheckInfo('This field is required !!!')
                     } else {
-                        localStorage.setItem("username", userName)
+                        localStorage.setItem("username", dataCheck.username)
+                        props.setcurrentUserName(dataCheck.username)
                         localStorage.setItem("iduser", res.data.id)
-                        props.history.push("/statistical")
-                        window.location.reload(true)
+                        localStorage.setItem("key_check", res.data.key_check)
+                        props.history.push("/")
                     }
                 })
             } else {
-                localStorage.setItem("username", userName)
+                props.setcurrentUserName(dataCheck.username)
+                localStorage.setItem("username", dataCheck.username)
                 localStorage.setItem("iduser", res.data.id)
                 props.history.push("/")
-                window.location.reload(true)
             }
         })
     }
 
     const handleSignup = () => {
-        // kiểm tra xem trong database có trùng username hay ko
         let dataCheck = {
-            username: userNameVal
+            username: usernameRef.current.value
         }
         checksignup(dataCheck).then(res => {
             if (
-                phoneVal > 13 ||
-                passwordVal < 6 ||
+                phoneNumRef.current.value > 13 ||
+                passwordRef.current.value < 6 ||
                 res.data == false ||
-                passwordVal != confirmPasswordVal
+                passwordRef.current.value != confirmPasswordRef.current.value
             ) {
-                setCheckInfoSignup(false)
+                setCheckInfoSignup('This field is required. !!!')
             } else {
-                // username ko trùng tên thì sẽ đc signup
-                console.log(userNameVal)
-                console.log(passwordVal)
-                console.log(phoneVal)
                 let data = {
-                    phone: phoneVal,
-                    username: userNameVal,
-                    password: passwordVal
+                    phone: phoneNumRef.current.value,
+                    username: usernameRef.current.value,
+                    password: passwordRef.current.value
                 }
                 Signup(data).then(() => console.log('oke'))
             }
         })
-    }
-
-    const handleInputPhone = (e) => {
-        let currentValue = e.target.value
-        if (currentValue !== null || currentValue !== "") {
-            if (isNaN(currentValue)) {
-                currentValue = ""
-            }
-        }
-        setPhoneVal(currentValue)
     }
 
     return (
@@ -96,47 +79,72 @@ export default function Signin(props) {
                             <img src="/Image/undraw_Online_shopping.svg" alt="" style={{ width: "100%", padding: "50px" }} />
                         </div>
                         <div className="col-md-6" style={{ borderLeft: "1px solid #e2e2e2" }}>
-
-                            {/* form signin is show */}
-                            {!isSignup ? <div className="form-sign-in">
+                            {!isSignup ? <form className="form-sign-in" autoComplete='on' onSubmit={(e) => {
+                                e.preventDefault()
+                                handleSignin()
+                            }}>
                                 <div className="con-username active">
-                                    <p>User name</p>
-                                    <input value={userNameVal} style={userNameVal != '' ? {} : !checkInfo ? { border: "1px solid rgb(221, 48, 48)" } : {}} type="text" placeholder="user name" onChange={(e) => setUserNameVal(e.target.value)} />
+                                    <p>Username</p>
+                                    <input
+                                        autoComplete='on'
+                                        ref={usernameRef}
+                                        type="text"
+                                        placeholder="username"
+                                    />
                                 </div>
                                 <div className="con-password active">
                                     <p>Password</p>
-                                    <input value={passwordVal} style={passwordVal != '' ? {} : !checkInfo ? { border: "1px solid rgb(221, 48, 48)" } : {}} type="password" placeholder="password" onChange={(e) => setPasswordVal(e.target.value)} />
+                                    <input
+                                        autoComplete='on'
+                                        ref={passwordRef}
+                                        type="password"
+                                        placeholder="password"
+                                    />
                                 </div>
+                                <input type="submit" className='hidden' />
                                 <div className="check">
                                     <input type="checkbox" /><span>Remember me?</span>
                                 </div>
-                                {userNameVal != '' && passwordVal != '' ? null : !checkInfo ? <p style={{ color: "red", fontSize: "12px", fontStyle: "italic" }}>please check information !!!</p> : ''}
+                                {checkInfo != '' ? <p className='text-red-500 text-sm'>{checkInfo}</p> : ''}
                                 <div className="con-button-sign">
                                     <button className="btn-sign-in" onClick={() => handleSignin()}>Sign in</button><br />
-                                    <Link to="" className="button-fogot">Forgot Password?</Link>
+                                    <Link to="#" className="button-fogot">Forgot Password?</Link>
                                 </div>
                                 <button className="sign-up" onClick={() => setIsSignup(true)}>Sign up</button>
-                            </div> : null}
+                            </form> : null}
 
-                            {/* form signup is show */}
                             {isSignup ? <div className="form-sign-up">
                                 <div className="con-username active">
                                     <p>User name</p>
-                                    <input value={userNameVal} style={userNameVal != '' ? {} : !checkInfoSignup ? { border: "1px solid rgb(221, 48, 48)" } : {}} type="text" placeholder="user name" onInput={(e) => setUserNameVal(e.target.value)} />
+                                    <input
+                                        ref={usernameRef}
+                                        type="text" placeholder="username"
+                                    />
                                 </div>
                                 <div className="con-password active">
                                     <p>Password</p>
-                                    <input value={passwordVal} style={passwordVal != '' ? {} : !checkInfoSignup ? { border: "1px solid rgb(221, 48, 48)" } : {}} type="password" placeholder="password" onInput={(e) => setPasswordVal(e.target.value)} />
+                                    <input
+                                        ref={passwordRef}
+                                        type="password" placeholder="password"
+                                    />
                                 </div>
                                 <div className="con-password active">
                                     <p>Confirm Password</p>
-                                    <input value={confirmPasswordVal} style={confirmPasswordVal != '' ? {} : !checkInfoSignup ? { border: "1px solid rgb(221, 48, 48)" } : {}} type="password" placeholder="password" onInput={(e) => setConfirmPasswordVal(e.target.value)} />
+                                    <input
+                                        ref={confirmPasswordRef}
+                                        type="password"
+                                        placeholder="password"
+                                    />
                                 </div>
                                 <div className="con-password active" >
                                     <p >Phone</p>
-                                    <input value={phoneVal} style={phoneVal != '' || phoneVal.length < 13 ? {} : !checkInfoSignup ? { border: "1px solid rgb(221, 48, 48) " } : {}} type="text" placeholder="phone" onInput={(e) => handleInputPhone(e)} />
+                                    <input
+                                        ref={phoneNumRef}
+                                        type="number"
+                                        placeholder="phone"
+                                    />
                                 </div>
-                                {userNameVal != '' && passwordVal != '' && phoneVal != '' && confirmPasswordVal != '' ? null : !checkInfoSignup ? <p style={{ color: "red", fontSize: "12px", fontStyle: "italic" }}>please check information !!!</p> : null}
+                                {checkInfoSignup != '' ? <p className='text-red-500 text-sm'>{checkInfoSignup}</p> : ''}
                                 <div className="con-button-sign">
                                     <button className="btn-sign-in" onClick={() => handleSignup()}>Sign up</button><br />
                                     <br />

@@ -86,8 +86,7 @@ export default function Detail(props) {
             create_date: currentDateTime
         }
         if (e.size == null || selectSize !== "") {
-            addtocart(data).then(res => {
-            })
+            addtocart(data).then()
         }
     }
 
@@ -101,7 +100,6 @@ export default function Detail(props) {
         setQuantity(quantity + 1)
     }
 
-    // xử lý khi người dùng nhập NaN sẽ tự động convert thành khoảng trắng.
     const inputQuantity = (e) => {
         let parseQuantity = e.target.value
         if (!isNaN(parseQuantity)) {

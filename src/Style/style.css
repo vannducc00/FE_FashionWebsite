@@ -26,30 +26,6 @@
     line-height: 50px;
 }
 
-.bar-left > ul > li {
-    margin-right: 34px;
-    cursor: pointer;
-}
-
-.bar-left > ul > li > span > i {
-    margin-right: 8px;
-}
-
-.bar-right ul {
-    float: right;
-}
-
-.bar-right > ul > li {
-    padding: 0 15px;
-    cursor: pointer;
-}
-
-.bar-left,
-.bar-right {
-    font-size: 14px;
-    color: black;
-}
-
 .contact-us ul {
     display: flex;
     list-style: none;
@@ -743,4 +719,40 @@
 .active-border-chart {
     border: 1px solid rgb(173, 173, 173);
     padding: 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(187, 187, 187);
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a5a5a5;
+}
+
+.active--current-menu {
+    border-bottom: 1px solid rgb(163, 163, 163);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }

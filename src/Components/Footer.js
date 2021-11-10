@@ -25,59 +25,59 @@ export default function Footer() {
                     <div className="col-3 category-e">
                         <ul>
                             {dataColFirst.map((item, index) =>
-                                <li className="item" key={index} ><p>{item}</p></li>
+                                <li className="py-1 text-xs" key={index} ><p>{item}</p></li>
                             )}
                         </ul>
                     </div>
                     <div className="col-3 category-e">
                         <ul>
-                            <li className="item">
+                            <li className="py-1 text-sm">
                                 <p>CUSTOMER CARE</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Exclusive Services</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Contact Us</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>FAQs</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Orders & Shipping</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Returns & Refunds</p>
                             </li>
                         </ul>
                     </div>
                     <div className="col-3 category-e">
                         <ul>
-                            <li className="item"> <p> ABOUT US</p></li>
-                            <li className="item"> <p> Company Profile</p></li>
-                            <li className="item"> <p> Corporate Data</p></li>
-                            <li className="item"> <p> Investor Relations</p></li>
-                            <li className="item"> <p> Careers</p></li>
+                            <li className="py-1 text-sm"> <p> ABOUT US</p></li>
+                            <li className="py-1 text-xs"> <p> Company Profile</p></li>
+                            <li className="py-1 text-xs"> <p> Corporate Data</p></li>
+                            <li className="py-1 text-xs"> <p> Investor Relations</p></li>
+                            <li className="py-1 text-xs"> <p> Careers</p></li>
                         </ul>
                     </div>
                     <div className="col-3 category-e">
                         <ul>
-                            <li className="item">
+                            <li className="py-1 text-sm">
                                 <p>LEGAL</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Legal Notes</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Terms & Conditions</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>General Conditions of Purchase</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Code of Business Conduct and Ethics</p>
                             </li>
-                            <li className="item">
+                            <li className="py-1 text-xs">
                                 <p>Privacy Policy</p>
                             </li>
                         </ul>

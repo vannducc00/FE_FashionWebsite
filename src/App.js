@@ -24,6 +24,8 @@ const history = createBrowserHistory();
 export default function App(props) {
   const [countBag, setCountBag] = useState(0)
   const [lastCount, setLastCount] = useState(0)
+  const [txtUsername, settxtUsername] = useState('')
+  const [currentUserName, setcurrentUserName] = useState(null)
   let isUser = localStorage.getItem('iduser')
 
   const onChangeCountCart = (value) => {
@@ -39,18 +41,17 @@ export default function App(props) {
     )
   }, [lastCount])
 
-
   return (
     <>
       <Router>
         <div style={{ backgroundColor: "#ffff" }} className="container-fluid scrollbar" style={{ padding: "0 70px" }} id="style-1">
           <div className="row" style={{ marginTop: "10px" }}>
-            <Navigation history={history} countBag={parseInt(countBag)} />
+            <Navigation history={history} countBag={parseInt(countBag)} currentUserName={currentUserName} />
           </div>
         </div>
         <Route exact path="/" render={(props) => <Home history={history} {...props} />} />
         <Route exact path="/detail/:idpro" render={(props) => <Detail history={history} {...props} countCart={onChangeCountCart} />} />
-        <Route exact path="/signin" render={(props) => <Signin history={history} {...props} />} />
+        <Route exact path="/signin" render={(props) => <Signin history={history} {...props} currentUserName={currentUserName} setcurrentUserName={(username) => setcurrentUserName(username)} />} />
         <Route exact path="/productmen" render={(props) => <Men history={history} {...props} />} />
         <Route exact path="/productwomen" render={(props) => <Women history={history} {...props} />} />
         <Route exact path="/handbag" render={(props) => <Handbag history={history} {...props} />} />
