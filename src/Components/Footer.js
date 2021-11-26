@@ -20,7 +20,7 @@ export default function Footer() {
                     <i className="fab fa-pinterest"></i>
                 </div>
             </div>
-            <div className="container" style={{ padding: "30px 0" }}>
+            {/* <div className="container px-8 py-5">
                 <div className="row">
                     <div className="col-3 category-e">
                         <ul>
@@ -83,7 +83,7 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div >
     )
 }

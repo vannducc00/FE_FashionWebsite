@@ -1,18 +1,24 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory
+} from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
-import { Mensellection, productHandbag } from "../Service"
+import { Mensellection, productHandbag } from "../../Service"
 
 export default function Home(props) {
+    const history = useHistory()
     const [arrProductSamples, setArrProductSamples] = useState([])
     const [arrMensellection, setArrMensellection] = useState([])
 
     useEffect(() => {
         productHandbag().then((res) => {
             let arrProductSamples = []
-            res.data.forEach(item => {
+            res.data.map(item => {
                 arrProductSamples.push(item)
             })
             setArrProductSamples(arrProductSamples)
@@ -20,32 +26,19 @@ export default function Home(props) {
 
         Mensellection().then((res) => {
             let arrMensellection = []
-            res.data.forEach(item => {
+            res.data.map(item => {
                 arrMensellection.push(item)
             })
             setArrMensellection(arrMensellection)
         })
     }, [])
 
-    const modernuniform = () => {
-        props.history.push("/productmen")
-    }
 
     const detailProduct = (value) => {
-        props.history.push("/detail/" + value.id);
+        history.push("/main/detail/" + value.id);
     }
 
-    const productMen = () => {
-        props.history.push("/productmen")
-    }
 
-    const productWomen = () => {
-        props.history.push("/productwomen")
-    }
-
-    const Handbag = () => {
-        props.history.push("/handbag")
-    }
     return (
         <div style={{ paddingTop: "130px" }}>
             <div className="Slider" style={{ height: "558px" }}>
@@ -62,11 +55,11 @@ export default function Home(props) {
 
             <div style={{ textAlign: "center", padding: "35px 80px 58px 80px" }}>
                 <h3 className="title-pro">PRE-FALL 2021</h3>
-                <p className="review">Referencing brand muses, the new collection is all about Fashion essentials for the men and women of today.</p>
-                <button className="button-gender" style={{ borderRight: "0.5px solid black" }} onClick={productWomen}>WOMEN</button>
-                <button className="button-gender" style={{ borderLeft: "0.5px solid black" }} onClick={productMen}>MEN</button>
+                <p className="review">Tham khảo thương hiệu Italy, bộ sưu tập mới là tất cả về thời trang thiết yếu cho nam giới và phụ nữ ngày nay.</p>
+                <button className="button-gender" style={{ borderRight: "0.5px solid black" }} onClick={() => history.push("/main/productwomen")}>NỮ</button>
+                <button className="button-gender" style={{ borderLeft: "0.5px solid black" }} onClick={() => history.push("/main/productmen")}>NAM</button>
             </div>
-            <h3 className="title-pro">LA MEDUSA HOBO BAGS</h3>
+            <h3 className="title-pro">TÚI XÁCH LA MEDUSA </h3>
             <div className="container-fluid" style={{ padding: "0px 4.5rem" }}>
                 <div className="row">
                     {
@@ -80,7 +73,7 @@ export default function Home(props) {
                                             </div>
                                             <div style={{ paddingTop: "10px" }}>
                                                 <p className="name-pr-samples">{item.name}</p>
-                                                <p className="price-pr-samples">{item.price} $</p>
+                                                <p className="price-pr-samples">{item.price} đ</p>
                                             </div>
                                         </div>
                                     </div>
@@ -98,17 +91,17 @@ export default function Home(props) {
                     </div>
                     <div className="col-md-7" style={{ position: "relative" }}>
                         <div className="text-content">
-                            <h3 className="heading">the bag of the moment</h3>
-                            <p style={{ width: "90%" }}>Featuring a contemporary curved silhouette, the new hobo bag is crafted in Italy
-                                from lightly grained calf leather. Available in two sizes and an array of colorways,
-                                the new style boasts the iconic La Medusa plaque.</p>
-                            <button className="button-shop-now" onClick={Handbag}>shop now</button>
+                            <h3 className="heading">Túi xách thời nay</h3>
+                            <p style={{ width: "90%" }}>Với hình dáng cong hiện đại, chiếc túi hobo mới được làm thủ công tại Ý
+                                từ da bê sần nhẹ. Có sẵn ở hai kích thước và một loạt các đường màu,
+                                phong cách mới tự hào có tấm bảng La Medusa mang tính biểu tượng.</p>
+                            <button className="button-shop-now" onClick={() => history.push("/main/handbag")}>mua sắm ngay</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h3 className="title-pro">MEN'S SELECTION</h3>
+            <h3 className="title-pro">LỰA CHỌN DÀNH CHO NAM</h3>
             <div className="container-fluid" style={{ padding: "0px 4.5rem" }}>
                 <div className="row">
                     {
@@ -120,7 +113,7 @@ export default function Home(props) {
                                     </div>
                                     <div style={{ paddingTop: "10px" }}>
                                         <p className="name-pr-samples">{item.name}</p>
-                                        <p className="price-pr-samples">{item.price} $</p>
+                                        <p className="price-pr-samples">{item.price} đ</p>
                                     </div>
                                 </div>
                             </div>
@@ -133,11 +126,11 @@ export default function Home(props) {
                 <div className="row">
                     <div className="col-md-5" style={{ position: "relative" }}>
                         <div className="text-content">
-                            <h3 className="heading">A MODERN MAN'S UNIFORM</h3>
-                            <p style={{ width: "80%" }}>Menswear from the new collection presents the modern
-                                uniform for the guy of today. Fashion’s version of a camouflage
-                                print – Baroccoflage – pairs perfectly with staple denim and bold footwear.</p>
-                            <button className="button-shop-now" onClick={modernuniform}>shop now</button>
+                            <h3 className="heading">THỜI TRANG NAM GIỚI HIỆN ĐẠI</h3>
+                            <p style={{ width: "80%" }}>Trang phục nam từ bộ sưu tập mới thể hiện sự hiện đại
+                                đồng phục cho chàng trai của ngày hôm nay. Phiên bản ngụy trang của thời trang
+                                print - Baroccoflage - kết hợp hoàn hảo với denim chủ lực và giày dép đậm.</p>
+                            <button className="button-shop-now" onClick={() => history.push("/main/productmen")}>mua sắm ngay</button>
                         </div>
                     </div>
                     <div className="col-md-7">

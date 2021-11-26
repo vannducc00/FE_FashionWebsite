@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { productwomen } from "../Service"
+import React, { useEffect, useState } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory
+} from "react-router-dom";
+import { productwomen } from "../../Service"
 
 
 export default function Women(props) {
+    const history = useHistory()
     const [arrProductWomen, setArrProductWomen] = useState([])
     useEffect(() => {
         productwomen().then(res => {
@@ -17,7 +23,7 @@ export default function Women(props) {
 
 
     const proWomenDetail = (value) => {
-        props.history.push("/Detail/" + value.id)
+        history.push("/main/Detail/" + value.id)
     }
 
     return (
@@ -30,7 +36,7 @@ export default function Women(props) {
                                 <img src={item.Image} alt="" className="list-image image-pr-samples" />
                             </div>
                             <p className="list-name">{item.name}</p>
-                            <p className="list-price">$ {item.price}</p>
+                            <p className="list-price">{item.price} đ</p>
                         </div>
                     </div>
                 ))}

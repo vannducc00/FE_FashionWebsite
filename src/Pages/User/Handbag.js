@@ -1,7 +1,13 @@
-import React, { Component, useState, useEffect } from 'react'
-import { handbag } from '../Service'
+import React, { useEffect, useState } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory
+} from "react-router-dom";
+import { handbag } from '../../Service'
 
 export default function Handbag(props) {
+    const history = useHistory()
     const [arrHandbag, setArrHandbag] = useState([])
 
     useEffect(() => {
@@ -15,7 +21,7 @@ export default function Handbag(props) {
     }, [])
 
     const handbagDetail = (value) => {
-        props.history.push("/Detail/" + value.id)
+        history.push("/main/Detail/" + value.id)
     }
 
     return (
@@ -26,7 +32,7 @@ export default function Handbag(props) {
                         <div className="con-product-gender" onClick={() => handbagDetail(item)}>
                             <img src={item.Image} alt="" className="list-image" />
                             <p className="list-name">{item.name}</p>
-                            <p className="list-price">$ {item.price}</p>
+                            <p className="list-price">{item.price} đ</p>
                         </div>
                     </div>
                 ))}

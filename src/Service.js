@@ -1,5 +1,5 @@
 import axios from "axios"
-const ip = "10.144.14.126"
+const ip = "192.168.2.107"
 const port = "8080"
 const url = "http://" + ip + ":" + port
 
@@ -170,6 +170,76 @@ export const jeancouture = () => {
     return axios({
         method: "POST",
         url: url + '/jeancouture'
+    })
+}
+
+export const admin = () => {
+    return axios({
+        method: "POST",
+        url: url + '/admin'
+    })
+}
+
+export const ManageUsers = () => {
+    return axios({
+        method: "POST",
+        url: url + '/manage_users'
+    })
+}
+
+export const addAccountAdmin = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/addAccountAdmin',
+        data
+    })
+}
+
+export const removeAccount = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/removeAccount',
+        data
+    })
+}
+
+export const removeAccountUser = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/removeAccountUser',
+        data
+    })
+}
+
+export const updateAccount = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/updateAccount',
+        data
+    })
+}
+
+export const delete_product = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/delete_product',
+        data
+    })
+}
+
+export const update_product = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/update_product',
+        data
+    })
+}
+
+export const create_product = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/create_product',
+        data
     })
 }
 

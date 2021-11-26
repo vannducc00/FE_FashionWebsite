@@ -1,7 +1,12 @@
 import { set } from 'date-fns/esm';
 import React, { Component, useState, useEffect, useRef } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory
+} from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Signup, checksignup, checksignin, checkpermissions, countcart } from "../Service"
+import { Signup, checksignup, checksignin, checkpermissions, countcart } from "../../Service"
 
 export default function Signin(props) {
     const [isSignup, setIsSignup] = useState('')
@@ -11,11 +16,11 @@ export default function Signin(props) {
     const passwordRef = useRef(null)
     const confirmPasswordRef = useRef(null)
     const phoneNumRef = useRef(null)
-
+    const history = useHistory()
+    let getIdCustomer = localStorage.getItem("iduser")
     useEffect(() => {
-        let getIdCustomer = localStorage.getItem("iduser")
-        if (getIdCustomer !== null) {
-            props.history.push("/")
+        if (getIdCustomer != null) {
+            history.push("/main/home")
         }
     }, [])
 
@@ -34,14 +39,18 @@ export default function Signin(props) {
                         props.setcurrentUserName(dataCheck.username)
                         localStorage.setItem("iduser", res.data.id)
                         localStorage.setItem("key_check", res.data.key_check)
-                        props.history.push("/")
+                        history.push("/system")
                     }
                 })
             } else {
+                let data = {
+                    customer_id: getIdCustomer
+                }
+                countcart(data).then()
                 props.setcurrentUserName(dataCheck.username)
                 localStorage.setItem("username", dataCheck.username)
                 localStorage.setItem("iduser", res.data.id)
-                props.history.push("/")
+                history.push("/main/home")
             }
         })
     }
@@ -148,7 +157,7 @@ export default function Signin(props) {
                                 <div className="con-button-sign">
                                     <button className="btn-sign-in" onClick={() => handleSignup()}>Sign up</button><br />
                                     <br />
-                                    <span className="button-acc">Already have an account?</span><Link to="/Signin" onClick={() => setIsSignup(false)}>Sign in</Link>
+                                    <span className="button-acc">Already have an account?</span><Link to="/main/Signin" onClick={() => setIsSignup(false)}>Sign in</Link>
                                 </div>
                             </div> : null}
                         </div>

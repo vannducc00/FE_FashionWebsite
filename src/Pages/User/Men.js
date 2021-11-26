@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { productmen } from "../Service"
+import React, { useEffect, useState } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory
+} from "react-router-dom";
+import { productmen } from "../../Service"
 
 export default function Men(props) {
+    const history = useHistory()
     const [arrProductMen, setArrProductMen] = useState([])
 
 
@@ -17,7 +23,7 @@ export default function Men(props) {
     }, [])
 
     const proMenDetail = (value) => {
-        props.history.push("/Detail/" + value.id)
+        history.push("/main/Detail/" + value.id)
     }
     return (
         <div className="container" style={{ marginTop: "13em" }}>
@@ -29,7 +35,7 @@ export default function Men(props) {
                                 <img src={item.Image} alt="" className="list-image image-pr-samples" />
                             </div>
                             <p className="list-name">{item.name}</p>
-                            <p className="list-price">$ {item.price}</p>
+                            <p className="list-price">{item.price} đ</p>
                         </div>
                     </div>
                 ))}

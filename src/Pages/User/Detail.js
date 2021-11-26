@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    useHistory,
+    useLocation
+} from "react-router-dom";
 import * as dayjs from 'dayjs'
-import { addtocart, getDetailproduct, relatedProduct, countcart } from "../Service"
+import { addtocart, getDetailproduct, relatedProduct, countcart } from "../../Service"
 
 export default function Detail(props) {
     const [quantity, setQuantity] = useState(1)
@@ -11,13 +17,15 @@ export default function Detail(props) {
     const [isShowImage, setIsShowImage] = useState('')
     const takeQuantity = useRef(null)
     let getIdCustomer = localStorage.getItem("iduser")
+    const history = useHistory()
+    const location = useLocation()
 
+    let stringPath = location.pathname.split('/')
+    let initialIdProduct = stringPath[stringPath.length - 1]
 
-    let initialIdProduct = props.match.params.idpro
     useEffect(() => {
         getProductDetail(props)
     }, [])
-
 
     const getProductDetail = (props) => {
         getDetailproduct(initialIdProduct).then(res => {
@@ -53,7 +61,7 @@ export default function Detail(props) {
     }, [initialIdProduct])
 
     const productRelated = (item) => {
-        props.history.push('/detail/' + item.id)
+        history.push('/main/detail/' + item.id)
     }
 
     const changeQuantity = (e) => {
@@ -102,7 +110,7 @@ export default function Detail(props) {
 
     const inputQuantity = (e) => {
         let parseQuantity = e.target.value
-        if (!isNaN(parseQuantity)) {
+        if (!isNaN(parseQuantity) && parseQuantity != '-') {
             setQuantity(parseQuantity)
         }
     }
@@ -137,7 +145,7 @@ export default function Detail(props) {
                         {arrDetail.map((item, index) => (
                             <div className="" key={index}>
                                 <h3 className="name-product">{item.name}</h3>
-                                <p className="price">$ {item.price}</p>
+                                <p className="price">{item.price} đ</p>
                                 <p className="description">{item.description}</p>
                                 <div className="con-size">
                                     {item.size ? item.size.map((item, index) =>
@@ -151,7 +159,7 @@ export default function Detail(props) {
                                 </div>
                                 <div className="quantity-select">
                                     <button className="change-number" onClick={changeMinus}><i className="fal fa-minus"></i></button>
-                                    <input type="text" value={quantity} ref={takeQuantity} onInput={(e) => inputQuantity(e)} />
+                                    <input type="text" disabled value={quantity} ref={takeQuantity} onInput={(e) => inputQuantity(e)} />
                                     <button className="change-number" onClick={changePlus}><i className="fal fa-plus"></i></button>
                                 </div>
                                 <div className="con-buy">
@@ -171,7 +179,7 @@ export default function Detail(props) {
                                 <div className="col-md-2" style={{ height: "", textAlign: "center" }} key={index} onClick={() => productRelated(item)} >
                                     <img src={item.Image} alt="" style={{ width: "85%", heigh: "80%" }} />
                                     <p className="name-relate">{item.name}</p>
-                                    <p className="price-relate">$ {item.price}</p>
+                                    <p className="price-relate">{item.price} đ</p>
                                 </div>
                             )
                         }

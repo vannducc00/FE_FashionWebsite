@@ -4,7 +4,7 @@ export const dataRevenueByMonth = {
         type: 'column'
     },
     title: {
-        text: 'Monthly revenue chart'
+        text: 'Doanh thu sản phẩm theo tháng'
     },
     xAxis: {
         categories: [],
@@ -46,7 +46,7 @@ export const dataByProduct = {
         type: 'column'
     },
     title: {
-        text: 'Revenue by type product'
+        text: 'Doanh thu theo từng sản phẩm'
     },
     subtitle: {
 
@@ -129,7 +129,7 @@ export const dataByRate = {
         type: 'pie'
     },
     title: {
-        text: 'Fashion shopping trends'
+        text: 'Xu hướng mua sắm sản phẩm'
     },
     credits: {
         enabled: false,

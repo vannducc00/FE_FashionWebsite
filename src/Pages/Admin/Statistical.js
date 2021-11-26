@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { revenuebymonth, revenuebyproduct } from '../Service'
+import { revenuebymonth, revenuebyproduct } from '../../Service'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { dataRevenueByMonth, dataByProduct, dataByRate } from '../valiable'
+import { dataRevenueByMonth, dataByProduct, dataByRate } from '../../valiable'
 import { useLocation, useHistory } from "react-router-dom";
 
 export default function Statistical(props) {
@@ -15,7 +15,7 @@ export default function Statistical(props) {
 
     useEffect(() => {
         if (localStorage.getItem('key_check') == null) {
-            history.push('/')
+            history.push('/main')
         }
     }, [])
 
@@ -90,9 +90,15 @@ export default function Statistical(props) {
     }, [])
 
     return (
-        <>
-            <div style={{ paddingTop: "200px" }}>
-                <div className="">
+        <div className='mb-5'>
+            <div className="flex items-center w-max cursor-pointer" onClick={() => { history.push('/system') }}>
+                <i className="fal fa-arrow-left arrown-back" ></i>Quay lại
+            </div>
+            <div className="text-center">
+                <h2 className='uppercase text-2xl mt-3'>Thống kê doanh số</h2>
+            </div>
+            <div className='mt-5 container-fluid'>
+                <div className="border-solid border-1 border-gray-300">
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={chartRevenueByMonth}
@@ -128,7 +134,7 @@ export default function Statistical(props) {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

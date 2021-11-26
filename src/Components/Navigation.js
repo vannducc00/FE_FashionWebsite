@@ -7,28 +7,28 @@ import { connect } from 'react-redux'
 export default function Navigation(props) {
     const arrNav = [
         {
-            name: 'women',
-            path: '/productwomen'
+            name: 'Nữ',
+            path: '/main/productwomen'
         },
         {
-            name: 'men',
-            path: '/productmen'
+            name: 'Nam',
+            path: '/main/productmen'
         },
         {
-            name: 'children',
-            path: '/children'
+            name: 'Trẻ em',
+            path: '/main/children'
         },
         {
-            name: 'home collection',
-            path: '/homecollection'
+            name: 'Bộ sưu tập',
+            path: '/main/homecollection'
         },
         {
-            name: 'jean couture',
-            path: '/jeancouture'
+            name: 'jean cao cấp',
+            path: '/main/jeancouture'
         },
         {
-            name: 'atelier fashion',
-            path: '/atelierfashion'
+            name: 'thời trang atelier',
+            path: '/main/atelierfashion'
         }
     ]
     const [currentUserName, setcurrentUserName] = useState(null)
@@ -56,12 +56,11 @@ export default function Navigation(props) {
     }, [props.currentUserName])
 
     const signOut = () => {
+        setIsLogin(false)
+        props.history.push("/main/signin")
         localStorage.removeItem("iduser")
         localStorage.removeItem("username")
         localStorage.removeItem("key_check")
-        setIsLogin(false)
-        props.history.push("/signin")
-        window.location.reload(true)
     }
 
     const handleSearch = () => {
@@ -103,8 +102,8 @@ export default function Navigation(props) {
                     <div className="row">
                         <div className="col-4">
                             <ul className='pl-10'>
-                                <li className=" cursor-pointer"><span><i className="far fa-phone-alt mr-2 text-lg"></i>Customer Service</span></li>
-                                <li className="ml-10 cursor-pointer"><span><i className="fal fa-map-marker-alt mr-2 text-lg"></i>Boutiques</span></li>
+                                <li className=" cursor-pointer"><span className='text-sm'><i className="far fa-phone-alt mr-2 text-lg"></i>+84 97551239</span></li>
+                                <li className="ml-10 cursor-pointer"><span className='text-sm'><i className="fal fa-map-marker-alt mr-2 text-lg"></i>số 146 Tràng Thi, Hà Nội</span></li>
                             </ul>
                         </div>
                         <div className="col-4" style={{ textAlign: "center", fontSize: "30px" }}>
@@ -114,24 +113,25 @@ export default function Navigation(props) {
                             <ul className='float-right pr-5'>
                                 <li>
                                     {!isLogin ?
-                                        <Link to="/Signin" className="btn-sign-in">Sign in / Register</Link> :
-                                        <div className="con-select">
+                                        <span className="btn-sign-in cursor-pointer" onClick={() => history.push('/main/signin')}>Đăng nhập</span> :
+                                        <div className="con-select cursor-pointer">
                                             <div>
                                                 <i className="far fa-user-circle"></i><span>{currentUserName}</span>
                                             </div>
                                             <div className="menu-select cursor-pointer">
-                                                <p className={localStorage.getItem('key_ckeck') == null ? '' : 'hidden'} onClick={() => history.push('/statistical')}>Statistical</p>
-                                                <p className="sign-out" onClick={signOut}>Sign out</p>
+                                                <p className={localStorage.getItem('key_check') ? 'hidden' : 'block'} onClick={() => history.push('/profile')}>Hồ sơ</p>
+                                                <p className={localStorage.getItem('key_check') ? 'block' : 'hidden'} onClick={() => history.push('/system')}>Hệ thống</p>
+                                                <p className="sign-out" onClick={signOut}>Đăng xuất</p>
                                             </div>
                                         </div>
                                     }
                                 </li>
                                 <li><i className="fal fa-heart text-lg mx-4 cursor-pointer"></i></li>
                                 <li>
-                                    <Link to="/cart/:customerid" className="btn-sign-in cart">
+                                    <Link to="/main/cart/:customerid" className="btn-sign-in cart">
                                         <i className="fal fa-shopping-bag text-lg"></i>
-                                        <span style={{ padding: "0px 1px 0px 5px" }}>Bag</span>
-                                        {props.countBag >= 0 ? ': ' + props.countBag : ': ' + 0}
+                                        <span style={{ padding: "0px 1px 0px 5px" }}>Giỏ</span>
+                                        {props.countBag >= 0 && isLogin ? `: ${props.countBag}` : `: ${0}`}
                                     </Link>
                                 </li>
                             </ul>
@@ -139,7 +139,7 @@ export default function Navigation(props) {
                     </div>
                 </div>
                 <div className="title-web">
-                    <Link className="brand-name" to="/">Fashion</Link>
+                    <Link className="brand-name" to="/main/home">Fashion</Link>
                 </div>
 
                 {/* --------------------------------- Navigations --------------------------------- */}
@@ -164,13 +164,13 @@ export default function Navigation(props) {
                     <i className="fal fa-times" onClick={() => closeSearch()}></i>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <div className="con-search" style={{ textAlign: "center" }}>
-                            <h3>search</h3>
+                            <h3>Tìm kiếm</h3>
                             <form style={{ borderBottom: "0.2px solid black" }} onSubmit={(e) => {
                                 e.preventDefault()
                                 handleSearch()
                             }}>
                                 <input type="submit" style={{ display: 'none' }} />
-                                <input ref={searchItem} type="text" placeholder="Search" />
+                                <input ref={searchItem} type="text" placeholder="Tìm kiếm" />
                                 <i className="fal fa-search" onClick={handleSearch}></i>
                             </form>
                         </div>
@@ -180,11 +180,11 @@ export default function Navigation(props) {
                         <div className="row" style={{ overflow: "auto", maxHeight: "40em" }}>
                             {arrProduct.map((item, index) => (
                                 <div className="col-md-3" style={{ width: "15em", margin: "1em 0", position: "relative" }} key={index}>
-                                    <Link to={"/detail/" + item.id} style={{ textDecoration: "none", color: "black" }} onClick={() => closeSearch()}>
+                                    <Link to={"/main/detail/" + item.id} style={{ textDecoration: "none", color: "black" }} onClick={() => closeSearch()}>
                                         <div>
                                             <img src={item.Image} alt="" style={{ width: "100%" }} />
                                             <p style={{ textTransform: "capitalize", paddingBottom: "2.5em", paddingTop: "10px" }}>{item.name}</p>
-                                            <p style={{ position: "absolute", bottom: "0" }}>$ {item.price}</p>
+                                            <p style={{ position: "absolute", bottom: "0" }}>{item.price} đ</p>
                                         </div>
                                     </Link>
                                 </div>
