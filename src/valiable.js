@@ -92,29 +92,33 @@ export const dataByProduct = {
             colorByPoint: true,
             data: [
                 {
-                    name: "Shirt",
+                    name: "Áo choàng",
                     y: 0,
                 },
                 {
-                    name: "Trousers",
+                    name: "Áo",
                     y: 0,
                 },
                 {
-                    name: "Shoes",
+                    name: "Quần",
                     y: 0,
                 },
                 {
-                    name: "Handbag",
+                    name: "Giày",
                     y: 0,
                 },
                 {
-                    name: "Belts",
+                    name: "Túi xách",
                     y: 0,
                 },
                 {
-                    name: "Backpack",
+                    name: "Balo",
                     y: 0,
-                }
+                },
+                {
+                    name: "Jean",
+                    y: 0,
+                },
             ]
         }
     ]
@@ -156,23 +160,32 @@ export const dataByRate = {
         name: 'Brands',
         colorByPoint: true,
         data: [{
-            name: 'Shirt',
-            y: 0
-        }, {
-            name: 'Trousers',
-            y: 0
-        }, {
-            name: 'Shoes',
-            y: 0
-        }, {
-            name: 'Handbag',
-            y: 0
-        }, {
-            name: 'Belt',
-            y: 0
-        }, {
-            name: 'Backpack',
-            y: 0
-        }]
+            name: "Áo choàng",
+            y: 0,
+        },
+        {
+            name: "Áo",
+            y: 0,
+        },
+        {
+            name: "Quần",
+            y: 0,
+        },
+        {
+            name: "Giày",
+            y: 0,
+        },
+        {
+            name: "Túi xách",
+            y: 0,
+        },
+        {
+            name: "Balo",
+            y: 0,
+        },
+        {
+            name: "Jean",
+            y: 0,
+        },]
     }]
 }

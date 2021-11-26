@@ -83,17 +83,22 @@ export default function Cart(props) {
         ) {
             arrProCart.map((item) => {
                 let data = {
-                    cart_id: item.id_cart,
                     product_id: item.product_id,
                     customer_id: localStorage.getItem("iduser"),
                     name: FirstNameRef.current.value + LastNameRef.current.value,
                     address: AddressRef.current.value,
                     phone: PhoneRef.current.value,
                     date_payment: dayjs().format("YYYY-MM-DD"),
+                    name_product: item.name,
+                    image: item.Image,
+                    quantity: item.quantity,
                     amount: item.amount,
-                    type_pr_id: item.type_pr_id
+                    color: item.color,
+                    size: item.size,
+                    typeProduct: item.type_pr_id,
+                    pay_method: selectValue
                 }
-                payment(data).then(req => { })
+                payment(data).then(() => { })
             })
             setisShowTooltip(true)
         } else {
@@ -154,7 +159,7 @@ export default function Cart(props) {
                                             </div>
                                         </div>
                                         <div className="row" style={{ paddingTop: "1.5em" }}>
-                                            <div className="col-md-7">
+                                            <div className="col-md-6">
                                                 <p className="title-insert">Địa chỉ nhận hàng</p>
                                                 <div className="insert-text">
                                                     <input type="text" ref={AddressRef} name="" id="" />
@@ -181,7 +186,7 @@ export default function Cart(props) {
                                                     </div>
                                                     : null}
                                             </div>
-                                            <div className="col-md-5">
+                                            <div className="col-md-6">
                                                 <p className="title-insert">Số điện thoại</p>
                                                 <div className="insert-text" style={phone.length < 13 ? { border: "1px solid gray" } : { border: "1px solid red" }}>
                                                     <input type="text" ref={PhoneRef} value={phone} onInput={(e) => checkPhone(e)} />

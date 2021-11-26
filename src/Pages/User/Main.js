@@ -45,6 +45,7 @@ export default function Main() {
             setCountBag(res.data.count_pro)
         )
     }, [lastCount])
+
     return (
         <div>
             <div style={{ backgroundColor: "#ffff" }} className="container-fluid scrollbar" style={{ padding: "0 70px" }} id="style-1">
