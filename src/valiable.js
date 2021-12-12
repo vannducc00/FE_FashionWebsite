@@ -34,7 +34,7 @@ export const dataRevenueByMonth = {
         }
     },
     series: [{
-        name: 'Viet Nam',
+        name: 'Doanh thu',
         data: [],
         color: "#ff4757"
     }]
