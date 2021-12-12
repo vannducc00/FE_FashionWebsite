@@ -103,7 +103,7 @@ export default function Navigation(props) {
                         <div className="col-4">
                             <ul className='pl-10'>
                                 <li className=" cursor-pointer"><span className='text-sm'><i className="far fa-phone-alt mr-2 text-lg"></i>+84 97551239</span></li>
-                                <li className="ml-10 cursor-pointer"><span className='text-sm'><i className="fal fa-map-marker-alt mr-2 text-lg"></i>số 146 Tràng Thi, Hà Nội</span></li>
+                                <li className="ml-10 cursor-pointer"><span className='text-sm'><i className="far fa-envelope mr-2 text-lg"></i>vannducc00@gmail.com</span></li>
                             </ul>
                         </div>
                         <div className="col-4" style={{ textAlign: "center", fontSize: "30px" }}>

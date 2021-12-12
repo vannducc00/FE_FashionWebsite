@@ -112,6 +112,10 @@ export const dataByProduct = {
                     y: 0,
                 },
                 {
+                    name: "Thắt lưng",
+                    y: 0,
+                },
+                {
                     name: "Balo",
                     y: 0,
                 },
@@ -177,6 +181,10 @@ export const dataByRate = {
         },
         {
             name: "Túi xách",
+            y: 0,
+        },
+        {
+            name: "Thắt lưng",
             y: 0,
         },
         {

@@ -54,40 +54,43 @@ export default function Statistical(props) {
                     let isChartRate = chartRate
                     let seriesPro = isChartProduct.series[0]
                     let seriesRate = isChartRate.series[0]
-                    res.data.forEach(item => {
-                        if (item.type_pr_id === 0) {
+                    console.log(seriesPro)
+                    console.log(seriesRate)
+                    res.data.map(item => {
+                        if (item.type_pr_id == 0) {
                             seriesPro.data[0].y = (item.revenue)
                             seriesRate.data[0].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 1) {
+                        if (item.type_pr_id == 1) {
                             seriesPro.data[1].y = (item.revenue)
                             seriesRate.data[1].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 2) {
+                        if (item.type_pr_id == 2) {
                             seriesPro.data[2].y = (item.revenue)
                             seriesRate.data[2].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 3) {
+                        if (item.type_pr_id == 3) {
                             seriesPro.data[3].y = (item.revenue)
                             seriesRate.data[3].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 4) {
+                        if (item.type_pr_id == 4) {
                             seriesPro.data[4].y = (item.revenue)
                             seriesRate.data[4].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 5) {
+                        if (item.type_pr_id == 5) {
                             seriesPro.data[5].y = (item.revenue)
                             seriesRate.data[5].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 6) {
+                        if (item.type_pr_id == 6) {
                             seriesPro.data[6].y = (item.revenue)
                             seriesRate.data[6].y = (item.revenue);
                         }
-                        if (item.type_pr_id === 7) {
+                        if (item.type_pr_id == 7) {
                             seriesPro.data[7].y = (item.revenue)
                             seriesRate.data[7].y = (item.revenue);
                         }
                     })
+
                     setChartProduct(isChartProduct)
                     setChartRate(isChartRate)
                 })

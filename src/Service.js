@@ -1,5 +1,5 @@
 import axios from "axios"
-const ip = "192.168.2.107"
+const ip = "192.168.2.105"
 const port = "8080"
 const url = "http://" + ip + ":" + port
 
@@ -243,3 +243,25 @@ export const create_product = (data) => {
     })
 }
 
+export const list_paymen = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/list_paymen',
+        data
+    })
+}
+
+export const cancel_order = (data) => {
+    return axios({
+        method: "POST",
+        url: url + '/cancel_order',
+        data
+    })
+}
+
+export const list_payment = () => {
+    return axios({
+        method: "POST",
+        url: url + '/list_payment'
+    })
+}

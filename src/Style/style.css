@@ -926,3 +926,31 @@ input {
 .css-55vwbm-MuiTimeline-root {
     width: 150%;
 }
+
+.con-card {
+    height: 500px;
+    overflow: auto;
+    position: relative;
+}
+
+.operation {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    text-align: end;
+}
+
+.button-cancel {
+    background-color: rgb(231, 85, 59);
+    padding: 10px 20px;
+    margin: 20px;
+    color: white;
+}
+
+.product-name,
+.product-quantity,
+.product-amount,
+.product-color,
+.product-size {
+    padding: 5px 0;
+}

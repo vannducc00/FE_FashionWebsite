@@ -82,7 +82,7 @@ export default function Signin(props) {
         <>
             <div style={{ backgroundColor: "#F9F9F9" }}>
                 <div className="container" style={{ paddingTop: "13em" }}>
-                    <div className="sign-in"><h4>Sign in</h4></div>
+                    <div className="sign-in"><h4>Đăng nhập</h4></div>
                     <div className="row" style={{ paddingBottom: "50px" }}>
                         <div className="col-md-6">
                             <img src="/Image/undraw_Online_shopping.svg" alt="" style={{ width: "100%", padding: "50px" }} />
@@ -93,52 +93,52 @@ export default function Signin(props) {
                                 handleSignin()
                             }}>
                                 <div className="con-username active">
-                                    <p>Username</p>
+                                    <p>Tài khoản</p>
                                     <input
                                         autoComplete='on'
                                         ref={usernameRef}
                                         type="text"
-                                        placeholder="username"
+                                        placeholder="Tài khoản..."
                                     />
                                 </div>
                                 <div className="con-password active">
-                                    <p>Password</p>
+                                    <p>Mật khẩu</p>
                                     <input
                                         autoComplete='on'
                                         ref={passwordRef}
                                         type="password"
-                                        placeholder="password"
+                                        placeholder="Mật khẩu..."
                                     />
                                 </div>
                                 <input type="submit" className='hidden' />
                                 <div className="check">
-                                    <input type="checkbox" /><span>Remember me?</span>
+                                    <input type="checkbox" /><span>Nhớ mật khẩu?</span>
                                 </div>
                                 {checkInfo != '' ? <p className='text-red-500 text-sm'>{checkInfo}</p> : ''}
                                 <div className="con-button-sign">
-                                    <button className="btn-sign-in" onClick={() => handleSignin()}>Sign in</button><br />
-                                    <Link to="#" className="button-fogot">Forgot Password?</Link>
+                                    <button className="btn-sign-in" onClick={() => handleSignin()}>Đăng nhập</button><br />
+                                    <Link to="#" className="button-fogot">Quên mật khẩu?</Link>
                                 </div>
-                                <button className="sign-up" onClick={() => setIsSignup(true)}>Sign up</button>
+                                <button className="sign-up" onClick={() => setIsSignup(true)}>Đăng ký</button>
                             </form> : null}
 
                             {isSignup ? <div className="form-sign-up">
                                 <div className="con-username active">
-                                    <p>User name</p>
+                                    <p>Tài khoản</p>
                                     <input
                                         ref={usernameRef}
-                                        type="text" placeholder="username"
+                                        type="text" placeholder="Tài khoản..."
                                     />
                                 </div>
                                 <div className="con-password active">
-                                    <p>Password</p>
+                                    <p>Mật khẩu</p>
                                     <input
                                         ref={passwordRef}
-                                        type="password" placeholder="password"
+                                        type="password" placeholder="Mật khẩu..."
                                     />
                                 </div>
                                 <div className="con-password active">
-                                    <p>Confirm Password</p>
+                                    <p>Nhập lại mật khẩu</p>
                                     <input
                                         ref={confirmPasswordRef}
                                         type="password"
@@ -146,7 +146,7 @@ export default function Signin(props) {
                                     />
                                 </div>
                                 <div className="con-password active" >
-                                    <p >Phone</p>
+                                    <p >Số điện thoại</p>
                                     <input
                                         ref={phoneNumRef}
                                         type="number"
@@ -155,9 +155,9 @@ export default function Signin(props) {
                                 </div>
                                 {checkInfoSignup != '' ? <p className='text-red-500 text-sm'>{checkInfoSignup}</p> : ''}
                                 <div className="con-button-sign">
-                                    <button className="btn-sign-in" onClick={() => handleSignup()}>Sign up</button><br />
+                                    <button className="btn-sign-in" onClick={() => handleSignup()}>Đăng ký</button><br />
                                     <br />
-                                    <span className="button-acc">Already have an account?</span><Link to="/main/Signin" onClick={() => setIsSignup(false)}>Sign in</Link>
+                                    <span className="button-acc">Bạn đã có tài khoản?</span><Link to="/main/Signin" onClick={() => setIsSignup(false)}>Đăng nhập</Link>
                                 </div>
                             </div> : null}
                         </div>

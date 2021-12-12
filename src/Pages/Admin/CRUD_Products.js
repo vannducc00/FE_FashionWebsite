@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useHistory } from 'react-router';
 import TableProducts from './Table/TableProsducts';
 import CreateProducts from './CreateProducts';
+import TablePay from './Table/TablePay';
 
 
 export default function CRUD_Products() {
@@ -29,6 +30,7 @@ export default function CRUD_Products() {
                             <TabList onChange={handleChangeTabs} aria-label="lab API tabs example">
                                 <Tab label="Danh sách sản phẩm" value="1" />
                                 <Tab label="Thêm sản phẩm" value="2" />
+                                <Tab label="Danh sách đơn hàng" value="3" />
                             </TabList>
                         </Box>
                         <TabPanel value="1">
@@ -36,6 +38,9 @@ export default function CRUD_Products() {
                         </TabPanel>
                         <TabPanel value="2">
                             <CreateProducts />
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <TablePay />
                         </TabPanel>
                     </TabContext>
                 </Box>
