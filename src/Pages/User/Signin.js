@@ -11,11 +11,11 @@ import { Signup, checksignup, checksignin, checkpermissions, countcart } from ".
 export default function Signin(props) {
     const [isSignup, setIsSignup] = useState('')
     const [checkInfo, setCheckInfo] = useState(true)
-    const [checkInfoSignup, setCheckInfoSignup] = useState(true)
-    const usernameRef = useRef(null)
-    const passwordRef = useRef(null)
-    const confirmPasswordRef = useRef(null)
-    const phoneNumRef = useRef(null)
+    const [checkInfoSignup, setCheckInfoSignup] = useState('')
+    let usernameRef = useRef('')
+    let passwordRef = useRef('')
+    let confirmPasswordRef = useRef('')
+    let phoneNumRef = useRef('')
     const history = useHistory()
     let getIdCustomer = localStorage.getItem("iduser")
     useEffect(() => {
@@ -60,20 +60,23 @@ export default function Signin(props) {
             username: usernameRef.current.value
         }
         checksignup(dataCheck).then(res => {
+            let number = phoneNumRef.current.value
             if (
-                phoneNumRef.current.value > 13 ||
-                passwordRef.current.value < 6 ||
-                res.data == false ||
-                passwordRef.current.value != confirmPasswordRef.current.value
+                number.length <= 13 && number.length > 0 &&
+                passwordRef.current.value.length >= 6 &&
+                res.data == true &&
+                passwordRef.current.value == confirmPasswordRef.current.value
             ) {
-                setCheckInfoSignup('This field is required. !!!')
-            } else {
                 let data = {
                     phone: phoneNumRef.current.value,
                     username: usernameRef.current.value,
                     password: passwordRef.current.value
                 }
-                Signup(data).then(() => console.log('oke'))
+                console.log(data)
+                Signup(data).then()
+                alert('Đăng ký thành công')
+            } else {
+                alert('Đăng ký không thành công !!!')
             }
         })
     }
@@ -153,7 +156,7 @@ export default function Signin(props) {
                                         placeholder="phone"
                                     />
                                 </div>
-                                {checkInfoSignup != '' ? <p className='text-red-500 text-sm'>{checkInfoSignup}</p> : ''}
+                                {/* {checkInfoSignup != '' ? <p className='text-red-500 text-sm'>{checkInfoSignup}</p> : ''} */}
                                 <div className="con-button-sign">
                                     <button className="btn-sign-in" onClick={() => handleSignup()}>Đăng ký</button><br />
                                     <br />

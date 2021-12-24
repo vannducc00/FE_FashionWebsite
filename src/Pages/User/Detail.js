@@ -163,7 +163,7 @@ export default function Detail(props) {
                                     <button className="change-number" onClick={changePlus}><i className="fal fa-plus"></i></button>
                                 </div>
                                 <div className="con-buy">
-                                    <button className="buy" onClick={() => handleAddToBag(item, 1)}>add to bag</button>
+                                    <button className="buy" onClick={() => handleAddToBag(item, 1)}>Thêm vào giỏ hàng</button>
                                 </div>
                             </div>
                         )
